@@ -11,7 +11,8 @@ get_header();
     .contact-rivera-section {
         /* background: linear-gradient(135deg, #021226 0%, #062a4d 100%); */
         color: #fff;
-        padding: 60px 0;
+        padding: 150px 0 60px;
+        margin-top: 70px;
         font-family: 'Segoe UI', sans-serif;
         min-height: 80vh; /* Đảm bảo full màn hình */
         display: flex;
@@ -162,6 +163,11 @@ get_header();
 
     /* Responsive cho mobile */
     @media (max-width: 768px) {
+        .contact-rivera-section {
+            padding: 120px 0 40px;
+            margin-top: 70px;
+        }
+        
         .rv-row {
             flex-direction: column;
         }
@@ -173,6 +179,12 @@ get_header();
         .rv-form-row-dual {
             flex-direction: column;
             gap: 0;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .contact-rivera-section {
+            padding: 100px 0 30px;
         }
     }
 </style>

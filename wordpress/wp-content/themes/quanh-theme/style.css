@@ -13,7 +13,7 @@ Version: 1.0
 body {
   margin: 0;
   /* font-family: 'Segoe UI', Arial, sans-serif; */
-   font-family: 'Roboto', Arial, sans-serif;
+   font-family: 'Be Vietnam Pro', Arial, sans-serif;
   /* background: linear-gradient(135deg, #001f3f 0%, #003d5c 30%, #004d73 60%, #003d5c 100%); */
   background: url('assets/bg.svg');
   background-attachment: fixed; /* Giữ gradient cố định khi scroll */
@@ -2358,7 +2358,8 @@ position: relative;
 
   /* Contact Page */
   .contact-rivera-section {
-    padding: 100px 15px 50px;
+    padding: 120px 15px 50px;
+    margin-top: 70px;
   }
 
   .rv-container {
