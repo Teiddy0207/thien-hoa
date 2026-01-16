@@ -42,7 +42,10 @@ get_header();
           </p>
         </div>
 
-        <a href="#product-types" class="matbang-cta-button">XEM MẶT BẰNG</a>
+        <a href="#product-types" class="matbang-cta-button">
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/lienhe2.png" alt="Xem mặt bằng">
+          <span class="matbang-cta-text">XEM MẶT BẰNG</span>
+        </a>
       </div>
     </div>
 

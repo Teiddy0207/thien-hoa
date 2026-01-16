@@ -7,7 +7,7 @@
            alt="Khởi sinh trên đất phồn hoa" 
            class="hero-title-image">
       <a href="#lien-he" class="cta-btn-custom">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/bnn.png" alt="Nút liên hệ">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/lienhe2.png" alt="Nút liên hệ">
         <span class="cta-text">LIÊN HỆ</span>
       </a>   
     </div>

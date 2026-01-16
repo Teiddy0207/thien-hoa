@@ -260,10 +260,13 @@ body {
 /* Khung bao ngoài (Thẻ a) */
 .cta-btn-custom {
     position: relative; /* Làm mốc tọa độ */
-    display: inline-block;
+    display: block;
     text-decoration: none;
     transition: transform 0.3s ease;
     margin-top: 20px;
+    align-self: center; /* Căn giữa nút trong hero-content */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Ảnh nền nút */
@@ -282,7 +285,7 @@ body {
     transform: translate(-50%, -50%); /* Kỹ thuật căn giữa tuyệt đối chính xác */
     
     /* Style cho chữ */
-    color: white; /* Màu chữ trắng như trong ảnh */
+    color: rgb(0, 0, 0); /* Màu chữ trắng như trong ảnh */
     font-weight: 700;
     font-size: 16px;
     white-space: nowrap; /* Không cho chữ xuống dòng */
@@ -1180,24 +1183,35 @@ position: relative;
 }
 
 .matbang-cta-button {
+  position: relative;
   display: inline-block;
-  background: linear-gradient(135deg, #d4a574, #c89d68);
-  color: #003366;
-  padding: 16px 48px;
-  border-radius: 50px;
-  font-size: 18px;
-  font-weight: 700;
   text-decoration: none;
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 24px rgba(212, 165, 116, 0.3);
+  transition: transform 0.3s ease;
   align-self: flex-end;
 }
 
+.matbang-cta-button img {
+  display: block;
+  height: 50px;
+  width: auto;
+  margin: auto;
+}
+
+.matbang-cta-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+  font-size: 16px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
 .matbang-cta-button:hover {
-  background: linear-gradient(135deg, #c89d68, #d4a574);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(212, 165, 116, 0.4);
+  transform: translateY(-3px);
 }
 
 /* Responsive */
@@ -1247,6 +1261,16 @@ position: relative;
   .matbang-cta-button {
     width: 100%;
     align-self: stretch;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .matbang-cta-button img {
+    height: 48px;
+  }
+  
+  .matbang-cta-text {
+    font-size: 15px;
   }
 }
 
@@ -1915,6 +1939,16 @@ position: relative;
   .matbang-cta-button {
     width: 100%;
     align-self: stretch;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .matbang-cta-button img {
+    height: 44px;
+  }
+  
+  .matbang-cta-text {
+    font-size: 14px;
   }
 
   /* Product Section */
