@@ -20,9 +20,8 @@ get_header();
       <!-- Advantage 1 -->
       <div class="advantage-card">
         <div class="card-image">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/advantage-1.jpg" alt="Vị trí đắt giá">
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/uuthe1.png" alt="Vị trí đắt giá">
           <div class="card-overlay"></div>
-          <div class="card-icon">📍</div>
           <div class="card-content">
             <h3>VỊ TRÍ ĐẮT GIÁ</h3>
             <p class="card-description">
@@ -36,9 +35,8 @@ get_header();
       <!-- Advantage 2 -->
       <div class="advantage-card">
         <div class="card-image">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/advantage-2.jpg" alt="Kiến trúc tinh hoa">
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/uuthe2.png" alt="Kiến trúc tinh hoa">
           <div class="card-overlay"></div>
-          <div class="card-icon">🏛️</div>
           <div class="card-content">
             <h3>KIẾN TRÚC TINH HOA</h3>
             <p class="card-description">
@@ -52,9 +50,8 @@ get_header();
       <!-- Advantage 3 -->
       <div class="advantage-card">
         <div class="card-image">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/advantage-3.jpg" alt="Chủ đầu tư uy tín">
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/uuthe3.png" alt="Chủ đầu tư uy tín">
           <div class="card-overlay"></div>
-          <div class="card-icon">🏗️</div>
           <div class="card-content">
             <h3>CHỦ ĐẦU TƯ UY TÍN</h3>
             <p class="card-description">
@@ -68,9 +65,8 @@ get_header();
       <!-- Advantage 4 -->
       <div class="advantage-card">
         <div class="card-image">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/advantage-4.jpg" alt="Pháp lý minh bạch">
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/uuthe4.png" alt="Pháp lý minh bạch">
           <div class="card-overlay"></div>
-          <div class="card-icon">⚖️</div>
           <div class="card-content">
             <h3>PHÁP LÝ MINH BẠCH</h3>
             <p class="card-description">
@@ -84,9 +80,8 @@ get_header();
       <!-- Advantage 5 -->
       <div class="advantage-card">
         <div class="card-image">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/advantage-5.jpg" alt="Tiềm năng đầu tư">
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/uuthe5.png" alt="Tiềm năng đầu tư">
           <div class="card-overlay"></div>
-          <div class="card-icon">💡</div>
           <div class="card-content">
             <h3>TIỀM NĂNG ĐẦU TƯ</h3>
             <p class="card-description">

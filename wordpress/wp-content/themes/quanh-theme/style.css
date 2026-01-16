@@ -2435,7 +2435,9 @@ position: relative;
 
 .card-image {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: unset;
+  height: auto;
+  /* min-height: 200px; */
   border-radius: 15px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.05);
@@ -2443,17 +2445,19 @@ position: relative;
   transition: all 0.3s ease;
 }
 
+
+.card-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
 .advantage-card:hover .card-image {
   border-color: rgba(212, 175, 55, 0.5);
   transform: translateY(-5px);
 }
 
-.card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
 
 .advantage-card:hover img {
   transform: scale(1.1);
@@ -2886,10 +2890,7 @@ position: relative;
   display: block;
 }
 
-.card-image {
-  aspect-ratio: 4/3;
-  overflow: hidden;
-}
+
 
 .card-image img {
   width: 100%;
@@ -2919,7 +2920,7 @@ position: relative;
   color: #d4af37;
 }
 
-.card-content p {
+/* .card-content p {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 16px;
@@ -2928,7 +2929,7 @@ position: relative;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
+} */
 
 /* Pagination */
 .pagination {
