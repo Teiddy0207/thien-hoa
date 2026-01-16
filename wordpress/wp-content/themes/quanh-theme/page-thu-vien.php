@@ -22,19 +22,46 @@ get_header();
       
       <!-- Gallery Grid -->
       <div class="gallery-grid">
-        <div class="gallery-item">
-          <div class="gallery-image-wrapper">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/thuvien1.png" alt="Rivera Thiên Hoa">
-            <div class="image-label">ẢNH DIỄN HỌA 3D</div>
-          </div>
-        </div>
+        <?php
+        // Lấy tất cả ảnh đính kèm của page này
+        $attachments = get_attached_media('image', get_the_ID());
         
-        <div class="gallery-item">
-          <div class="gallery-image-wrapper">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/thuvien2.png" alt="Rivera Thiên Hoa">
-            <div class="image-label">ẢNH DIỄN HỌA 3D</div>
-          </div>
-        </div>
+        // Nếu không có ảnh đính kèm, lấy từ gallery custom field hoặc fallback
+        if (empty($attachments)) {
+          // Fallback: sử dụng ảnh mặc định
+          $default_images = array(
+            array('url' => get_template_directory_uri() . '/assets/thuvien1.png', 'alt' => 'Rivera Thiên Hoa'),
+            array('url' => get_template_directory_uri() . '/assets/thuvien2.png', 'alt' => 'Rivera Thiên Hoa')
+          );
+          
+          foreach ($default_images as $img) {
+            echo '<div class="gallery-item">';
+            echo '  <div class="gallery-image-wrapper">';
+            echo '    <img src="' . esc_url($img['url']) . '" alt="' . esc_attr($img['alt']) . '">';
+            echo '    <div class="image-label">ẢNH DIỄN HỌA 3D</div>';
+            echo '  </div>';
+            echo '</div>';
+          }
+        } else {
+          // Hiển thị ảnh từ Media Library
+          foreach ($attachments as $attachment) {
+            $image_url = wp_get_attachment_image_url($attachment->ID, 'large');
+            $image_alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
+            if (empty($image_alt)) {
+              $image_alt = get_the_title($attachment->ID);
+            }
+            $image_caption = wp_get_attachment_caption($attachment->ID);
+            $label = !empty($image_caption) ? $image_caption : 'ẢNH DIỄN HỌA 3D';
+            
+            echo '<div class="gallery-item">';
+            echo '  <div class="gallery-image-wrapper">';
+            echo '    <img src="' . esc_url($image_url) . '" alt="' . esc_attr($image_alt) . '">';
+            echo '    <div class="image-label">' . esc_html($label) . '</div>';
+            echo '  </div>';
+            echo '</div>';
+          }
+        }
+        ?>
       </div>
 
       <!-- Gallery Navigation -->

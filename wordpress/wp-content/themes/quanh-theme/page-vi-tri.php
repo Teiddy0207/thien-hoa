@@ -45,11 +45,7 @@ get_header();
 
         <!-- Bottom Text -->
         <div class="location-tagline">
-          <p class="tagline-line1">
-            Sống <span class="highlight">TINH HOA</span>
-          </p>
-          <p class="tagline-line2">nơi tâm điểm</p>
-          <p class="tagline-line3">GIAO HOÀ</p>
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/songtinhhoa2.png" alt="Sống TINH HOA nơi tâm điểm GIAO HOÀ">
         </div>
       </div>
 

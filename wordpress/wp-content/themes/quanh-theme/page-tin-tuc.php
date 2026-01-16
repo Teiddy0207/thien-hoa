@@ -29,11 +29,27 @@ get_header();
         ?>
           <a href="<?php the_permalink(); ?>" class="featured-card">
             <div class="featured-image">
-              <?php if (has_post_thumbnail()) : ?>
-                <?php the_post_thumbnail('large'); ?>
-              <?php else : ?>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/default-news.jpg" alt="<?php the_title(); ?>">
-              <?php endif; ?>
+              <?php 
+              if (has_post_thumbnail()) {
+                $thumbnail_id = get_post_thumbnail_id();
+                $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'large');
+                if ($thumbnail_url) {
+                  echo '<img src="' . esc_url($thumbnail_url) . '" alt="' . esc_attr(get_the_title()) . '">';
+                }
+              } else {
+                // Fallback: lấy ảnh đầu tiên trong nội dung bài viết
+                $content = get_the_content();
+                $first_image = '';
+                if (preg_match('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches)) {
+                  $first_image = $matches[1];
+                }
+                if ($first_image) {
+                  echo '<img src="' . esc_url($first_image) . '" alt="' . esc_attr(get_the_title()) . '">';
+                } else {
+                  echo '<div style="background: linear-gradient(135deg, #003d5c, #001f3f); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5);">Không có ảnh</div>';
+                }
+              }
+              ?>
             </div>
             <div class="featured-overlay"></div>
             <div class="featured-content">
@@ -68,11 +84,27 @@ get_header();
         ?>
           <a href="<?php the_permalink(); ?>" class="post-item">
             <div class="post-thumbnail">
-              <?php if (has_post_thumbnail()) : ?>
-                <?php the_post_thumbnail('medium'); ?>
-              <?php else : ?>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/default-news.jpg" alt="<?php the_title(); ?>">
-              <?php endif; ?>
+              <?php 
+              if (has_post_thumbnail()) {
+                $thumbnail_id = get_post_thumbnail_id();
+                $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'medium');
+                if ($thumbnail_url) {
+                  echo '<img src="' . esc_url($thumbnail_url) . '" alt="' . esc_attr(get_the_title()) . '">';
+                }
+              } else {
+                // Fallback: lấy ảnh đầu tiên trong nội dung bài viết
+                $content = get_the_content();
+                $first_image = '';
+                if (preg_match('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches)) {
+                  $first_image = $matches[1];
+                }
+                if ($first_image) {
+                  echo '<img src="' . esc_url($first_image) . '" alt="' . esc_attr(get_the_title()) . '">';
+                } else {
+                  echo '<div style="background: linear-gradient(135deg, #003d5c, #001f3f); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); font-size: 12px;">Không có ảnh</div>';
+                }
+              }
+              ?>
             </div>
             <div class="post-info">
               <div class="post-date"><?php echo get_the_date('d/m/Y'); ?></div>
@@ -92,62 +124,7 @@ get_header();
 
     </div>
 
-    <!-- More Posts Grid -->
-    <div class="more-posts">
-      <h2>TIN TỨC MỚI NHẤT</h2>
-      
-      <div class="posts-grid">
-        <?php
-        $grid_query = new WP_Query([
-          'posts_per_page' => 6,
-          'post_type' => 'post',
-          'offset' => 4,
-          'orderby' => 'date',
-          'order' => 'DESC'
-        ]);
 
-        if ($grid_query->have_posts()) :
-          while ($grid_query->have_posts()) : $grid_query->the_post();
-        ?>
-          <div class="grid-post-card">
-            <a href="<?php the_permalink(); ?>">
-              <div class="card-image">
-                <?php if (has_post_thumbnail()) : ?>
-                  <?php the_post_thumbnail('medium'); ?>
-                <?php else : ?>
-                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/default-news.jpg" alt="<?php the_title(); ?>">
-                <?php endif; ?>
-              </div>
-              <div class="card-content">
-                <div class="post-date"><?php echo get_the_date('d/m/Y'); ?></div>
-                <h3><?php the_title(); ?></h3>
-                <p><?php echo wp_trim_words(get_the_excerpt(), 15); ?></p>
-                <span class="read-more">
-                  <span>Đọc thêm</span>
-                  <span>→</span>
-                </span>
-              </div>
-            </a>
-          </div>
-        <?php
-          endwhile;
-          wp_reset_postdata();
-        endif;
-        ?>
-      </div>
-
-      <!-- Pagination -->
-      <div class="pagination">
-        <?php
-        echo paginate_links([
-          'total' => $grid_query->max_num_pages,
-          'prev_text' => '←',
-          'next_text' => '→',
-          'type' => 'list'
-        ]);
-        ?>
-      </div>
-    </div>
 
     <!-- Newsletter Subscribe -->
     <!-- <div class="newsletter-section">
