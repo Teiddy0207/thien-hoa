@@ -16,7 +16,14 @@
       <img src="<?php echo get_template_directory_uri(); ?>/assets/thienHoa.png" alt="Logo">
     </div>
 
-    <nav class="main-menu">
+    <!-- Hamburger Button -->
+    <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="main-menu" id="mainMenu">
       <ul class="menu"> 
       <?php
         wp_nav_menu([

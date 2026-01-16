@@ -20,3 +20,5 @@
     <img src="<?php echo get_template_directory_uri(); ?>/assets/line-removebg-preview.png" alt="">
   </div>
 </section>
+
+<?php get_footer(); ?>
