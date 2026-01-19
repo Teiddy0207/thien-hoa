@@ -115,10 +115,18 @@ $news_query = new WP_Query([
         <?php endwhile; ?>
       </div>
 
-      
     </div>
 
-    <!-- Pagination -->
+    <!-- Load thêm (AJAX) -->
+    <div id="news-load-more-container" class="news-load-more-container"></div>
+    <?php if ( $news_query->max_num_pages > 1 ) : ?>
+    <div class="news-load-more-actions">
+      <button type="button" class="news-load-more-btn" id="news-load-more-btn" data-current="1" data-max="<?php echo (int) $news_query->max_num_pages; ?>" data-label="Xem thêm tin tức" data-loading="Đang tải...">Xem thêm tin tức</button>
+      <p class="news-load-more-end" id="news-load-more-end" style="display:none;">Đã xem hết tin tức</p>
+    </div>
+    <?php endif; ?>
+
+    <!-- Pagination (giữ nguyên) -->
     <?php
     if ( $news_query->max_num_pages > 1 ) :
       $base = $news_page_url . ( strpos( $news_page_url, '?' ) !== false ? '&' : '?' ) . 'paged=%#%';

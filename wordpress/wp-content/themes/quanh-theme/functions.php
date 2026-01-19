@@ -16,6 +16,75 @@ function quanh_enqueue_styles() {
 }
 add_action('wp_enqueue_scripts', 'quanh_enqueue_styles');
 
+function quanh_enqueue_scripts() {
+  wp_enqueue_script(
+    'news-load-more',
+    get_template_directory_uri() . '/assets/js/news-load-more.js',
+    array(),
+    '1.0',
+    true
+  );
+  wp_localize_script('news-load-more', 'newsLoadMore', array(
+    'ajaxurl' => admin_url('admin-ajax.php'),
+    'nonce'   => wp_create_nonce('news_load_more'),
+  ));
+}
+add_action('wp_enqueue_scripts', 'quanh_enqueue_scripts');
+
+/**
+ * AJAX: Load thêm tin tức (trang Tin tức)
+ */
+function quanh_ajax_news_load_more() {
+  check_ajax_referer('news_load_more', 'nonce');
+  $paged = max(1, (int) (isset($_POST['paged']) ? $_POST['paged'] : 0));
+
+  $q = new WP_Query(array(
+    'post_type'      => 'post',
+    'posts_per_page' => 4,
+    'paged'          => $paged,
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+  ));
+
+  ob_start();
+  if ($q->have_posts()) {
+    echo '<div class="news-load-more-batch"><div class="news-load-more-grid">';
+    while ($q->have_posts()) {
+      $q->the_post();
+      $thumb = '';
+      if (has_post_thumbnail()) {
+        $url = wp_get_attachment_image_url(get_post_thumbnail_id(), 'medium');
+        if ($url) {
+          $thumb = '<img src="' . esc_url($url) . '" alt="' . esc_attr(get_the_title()) . '">';
+        }
+      }
+      if (!$thumb) {
+        $content = get_the_content();
+        if (preg_match('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $m)) {
+          $thumb = '<img src="' . esc_url($m[1]) . '" alt="' . esc_attr(get_the_title()) . '">';
+        } else {
+          $thumb = '<div style="background:linear-gradient(135deg,#003d5c,#001f3f);width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);font-size:12px;">Không có ảnh</div>';
+        }
+      }
+      echo '<a href="' . esc_url(get_permalink()) . '" class="post-item">';
+      echo '<div class="post-thumbnail">' . $thumb . '</div>';
+      echo '<div class="post-info">';
+      echo '<div class="post-date">' . esc_html(get_the_date('d/m/Y')) . '</div>';
+      echo '<h3>' . get_the_title() . '</h3>';
+      echo '<span class="read-more"><span>Đọc thêm</span><span>→</span></span>';
+      echo '</div></a>';
+    }
+    echo '</div></div>';
+  }
+  wp_reset_postdata();
+  $html = ob_get_clean();
+
+  $max = isset($q->max_num_pages) ? (int) $q->max_num_pages : 1;
+  wp_send_json_success(array('html' => $html, 'has_more' => $paged < $max));
+}
+add_action('wp_ajax_news_load_more', 'quanh_ajax_news_load_more');
+add_action('wp_ajax_nopriv_news_load_more', 'quanh_ajax_news_load_more');
+
 
 // --- BẮT ĐẦU COPY TỪ ĐÂY ---
 function tao_bai_viet_mock_rivera() {
