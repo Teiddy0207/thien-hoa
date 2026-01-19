@@ -14,7 +14,7 @@ get_header();
       
       <!-- Tên thương mại -->
       <div class="info-group">
-        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan2.png" alt=""></div>
+        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan1.png" alt=""></div>
         <div class="info-details">
           <div class="info-label">Tên thương mại:</div>
           <div class="info-value">RIVERA THIÊN HOA</div>
@@ -23,7 +23,7 @@ get_header();
 
       <!-- Vị trí -->
       <div class="info-group">
-        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan6.png" alt=""></div>
+        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan2.png" alt=""></div>
         <div class="info-details">
           <div class="info-label">Vị trí:</div>
           <div class="info-value">ẤP PHÚ LONG, XÃ TÂN PHÚ ĐÔNG,<br>TP. SA ĐÉC, TỈNH ĐỒNG THÁP</div>
@@ -32,7 +32,7 @@ get_header();
 
       <!-- Chủ đầu tư -->
       <div class="info-group">
-        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan1.png" alt=""></div>
+        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan3.png" alt=""></div>
         <div class="info-details">
           <div class="info-label">Chủ Đầu tư:</div>
           <div class="info-value">CÔNG TY TNHH THƯƠNG MẠI<br>ĐẦU TƯ XÂY DỰNG<br>DTK LAND SA ĐÉC (DTK LAND)</div>
@@ -41,7 +41,7 @@ get_header();
 
       <!-- Quy mô -->
       <div class="info-group">
-        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan5.png" alt=""></div>
+        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan4.png" alt=""></div>
         <div class="info-details">
           <div class="info-label">Quy mô:</div>
           <div class="info-value">2.94 ha</div>
@@ -50,7 +50,7 @@ get_header();
 
       <!-- Đơn vị hợp tác phát triển -->
       <div class="info-group">
-        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan3.png" alt=""></div>
+        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan5.png" alt=""></div>
         <div class="info-details">
           <div class="info-label">Đơn vị hợp tác phát triển dự án:</div>
           <div class="info-value">CÔNG TY CP ĐẦU TƯ VÀ<br>PHÁT TRIỂN ĐÔ THỊ LONG GIANG<br>(LONG GIANG LAND)</div>
@@ -59,7 +59,7 @@ get_header();
 
       <!-- Loại hình sản phẩm -->
       <div class="info-group">
-        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan4.png" alt=""></div>
+        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan6.png" alt=""></div>
         <div class="info-details">
           <div class="info-label">Loại hình sản phẩm:</div>
           <div class="info-value">43 CĂN NHÀ Ở LIỀN KỀ,<br>121 LÔ ĐẤT NỀN</div>
@@ -69,7 +69,7 @@ get_header();
     </div>
 
     <!-- PROJECT IMAGE -->
-    <!-- <div class="project-image">
+    <div class="project-image">
       <?php
       if (has_post_thumbnail()) {
         the_post_thumbnail('full');
@@ -77,7 +77,7 @@ get_header();
         echo '<img src="' . get_template_directory_uri() . '/assets/images/project-overview.jpg" alt="Rivera Thiên Hoa Project">';
       }
       ?>
-    </div> -->
+    </div>
 
   </div>
 </section>

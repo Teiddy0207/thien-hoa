@@ -3,6 +3,25 @@
 Template Name: Tin Tức
 */
 get_header();
+
+// Trên Page template, get_query_var('page'/'paged') thường không có với /page/2/;
+// dùng ?paged= và $_GET là chắc chắn nhất.
+$paged = (int) get_query_var( 'paged' );
+if ( $paged < 1 ) $paged = (int) get_query_var( 'page' );
+if ( $paged < 1 && isset( $_GET['paged'] ) ) $paged = max( 1, (int) $_GET['paged'] );
+if ( $paged < 1 ) $paged = 1;
+
+// Lưu URL trang Tin tức TRƯỚC khi chạy WP_Query; sau loop get_permalink() sẽ trả về bài viết cuối.
+$news_page_url = get_permalink( get_queried_object_id() );
+if ( ! $news_page_url ) $news_page_url = get_permalink();
+
+$news_query = new WP_Query([
+  'post_type'      => 'post',
+  'posts_per_page' => 4,
+  'paged'         => $paged,
+  'orderby'       => 'date',
+  'order'         => 'DESC'
+]);
 ?>
 
 <section class="news-section">
@@ -14,18 +33,11 @@ get_header();
     <!-- Main Layout -->
     <div class="news-layout">
       
-      <!-- Left: Featured Post -->
+      <!-- Left: Featured Post (bài đầu tiên) -->
       <div class="featured-post">
         <?php
-        $featured_query = new WP_Query([
-          'posts_per_page' => 1,
-          'post_type' => 'post',
-          'orderby' => 'date',
-          'order' => 'DESC'
-        ]);
-
-        if ($featured_query->have_posts()) :
-          while ($featured_query->have_posts()) : $featured_query->the_post();
+        if ( $news_query->have_posts() ) :
+          $news_query->the_post();
         ?>
           <a href="<?php the_permalink(); ?>" class="featured-card">
             <div class="featured-image">
@@ -37,7 +49,6 @@ get_header();
                   echo '<img src="' . esc_url($thumbnail_url) . '" alt="' . esc_attr(get_the_title()) . '">';
                 }
               } else {
-                // Fallback: lấy ảnh đầu tiên trong nội dung bài viết
                 $content = get_the_content();
                 $first_image = '';
                 if (preg_match('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches)) {
@@ -61,26 +72,13 @@ get_header();
               </span>
             </div>
           </a>
-        <?php
-          endwhile;
-          wp_reset_postdata();
-        endif;
-        ?>
+        <?php endif; ?>
       </div>
 
-      <!-- Right: Post List -->
+      <!-- Right: Post List (3 bài tiếp theo) -->
       <div class="post-list">
         <?php
-        $recent_query = new WP_Query([
-          'posts_per_page' => 3,
-          'post_type' => 'post',
-          'offset' => 1,
-          'orderby' => 'date',
-          'order' => 'DESC'
-        ]);
-
-        if ($recent_query->have_posts()) :
-          while ($recent_query->have_posts()) : $recent_query->the_post();
+        while ( $news_query->have_posts() ) : $news_query->the_post();
         ?>
           <a href="<?php the_permalink(); ?>" class="post-item">
             <div class="post-thumbnail">
@@ -92,7 +90,6 @@ get_header();
                   echo '<img src="' . esc_url($thumbnail_url) . '" alt="' . esc_attr(get_the_title()) . '">';
                 }
               } else {
-                // Fallback: lấy ảnh đầu tiên trong nội dung bài viết
                 $content = get_the_content();
                 $first_image = '';
                 if (preg_match('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches)) {
@@ -115,16 +112,35 @@ get_header();
               </span>
             </div>
           </a>
-        <?php
-          endwhile;
-          wp_reset_postdata();
-        endif;
-        ?>
+        <?php endwhile; ?>
       </div>
 
+      
     </div>
 
+    <!-- Pagination -->
+    <?php
+    if ( $news_query->max_num_pages > 1 ) :
+      $base = $news_page_url . ( strpos( $news_page_url, '?' ) !== false ? '&' : '?' ) . 'paged=%#%';
+    ?>
+    <nav class="news-pagination" aria-label="Phân trang tin tức">
+      <?php
+      echo paginate_links([
+        'base'      => $base,
+        'format'    => '',
+        'current'   => $paged,
+        'total'     => $news_query->max_num_pages,
+        'prev_text' => '← Trước',
+        'next_text' => 'Sau →',
+        'type'      => 'plain',
+        'end_size'  => 1,
+        'mid_size'  => 2,
+      ]);
+      ?>
+    </nav>
+    <?php endif; ?>
 
+    <?php wp_reset_postdata(); ?>
 
     <!-- Newsletter Subscribe -->
     <!-- <div class="newsletter-section">
