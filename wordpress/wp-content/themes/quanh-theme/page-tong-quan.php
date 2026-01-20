@@ -52,7 +52,7 @@ get_header();
       <div class="info-group">
         <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan5.png" alt=""></div>
         <div class="info-details">
-          <div class="info-label">Đơn vị hợp tác phát triển dự án:</div>
+          <div class="info-label">Đơn vị hợp tác <br> phát triển dự án:</div>
           <div class="info-value">CÔNG TY CP ĐẦU TƯ VÀ<br>PHÁT TRIỂN ĐÔ THỊ LONG GIANG<br>(LONG GIANG LAND)</div>
         </div>
       </div>
@@ -61,7 +61,7 @@ get_header();
       <div class="info-group">
         <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan6.png" alt=""></div>
         <div class="info-details">
-          <div class="info-label">Loại hình sản phẩm:</div>
+          <div class="info-label">Loại hình <br> sản phẩm:</div>
           <div class="info-value">43 CĂN NHÀ Ở LIỀN KỀ,<br>121 LÔ ĐẤT NỀN</div>
         </div>
       </div>
