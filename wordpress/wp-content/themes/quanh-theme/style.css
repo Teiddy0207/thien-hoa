@@ -531,6 +531,10 @@ body {
   min-height: 100vh;
   padding: 150px 40px 80px;
   overflow: hidden;
+  background-image: url(assets/bgtongquan.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .overview-section::before {
@@ -2843,7 +2847,7 @@ position: relative;
 .featured-content h2 {
   font-size: 30px;
   font-weight: 700;
-  color: white;
+  color: #c5995b;
   margin-bottom: 20px;
   line-height: 1.3;
 }
@@ -2852,7 +2856,7 @@ position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #64584b;
   transition: color 0.3s ease;
 }
 
@@ -2926,7 +2930,7 @@ position: relative;
 .post-info h3 {
   font-size: 16px;
   font-weight: 700;
-  color: white;
+  color: #c5995b;
   margin-bottom: 12px;
   line-height: 1.4;
   display: -webkit-box;
@@ -3069,7 +3073,7 @@ position: relative;
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
-  margin-top: -150px;
+  margin-top: -210px;
   flex-wrap: wrap;
 }
 
@@ -3590,7 +3594,7 @@ position: relative;
 }
 
 .post-date {
-  color: #d4af37;
+    color: rgba(255, 255, 255, 0.6); /* 0.6 = độ mờ */
   font-weight: 600;
 }
 
