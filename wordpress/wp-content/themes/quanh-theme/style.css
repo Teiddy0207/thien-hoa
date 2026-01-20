@@ -1,4 +1,4 @@
-/*
+﻿/*
 Theme Name: Rivera Thiên Hoa
 Author: Quanh
 Version: 1.0
@@ -318,42 +318,55 @@ body {
 } 
 
 
-/* Tablet (1024px) */
+/* Tablet (1024px) - Layout như desktop */
 @media (max-width: 1024px) {
     .hero-section {
-        min-height: 90vh;
-        margin-top: 70px;
-        padding-bottom: 100px;
+        min-height: 100vh;
+        /* margin-top: 70px; */
+        /* padding-bottom: 80px; */
     }
 
     .hero-container {
         flex-direction: row;
         align-items: center;
-        gap: 30px;
-        padding: 0 30px;
+        /* gap: 30px; */
+        /* padding: 0 30px; */
     }
 
     .hero-content {
         width: 45%;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
         z-index: 20;
     }
 
     .hero-section .hero-image {
         position: absolute;
-        width: 55%;
-        height: 100%;
-        min-height: 90vh;
         right: 0;
         top: 0;
         bottom: 0;
+        width: 65%;
+        max-width: none;
+        height: 100%;
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        z-index: 1;
+        pointer-events: none;
     }
 
     .hero-section .hero-image img {
-        width: 100%;
+        width: auto;
         height: 100%;
-        max-height: 90vh;
+        max-width: none;
+        max-height: 100vh;
         object-fit: contain;
         object-position: right center;
+        display: block;
     }
 
     .hero-title-image {
@@ -361,18 +374,20 @@ body {
         margin-bottom: 30px;
     }
 
+    .cta-btn-custom img {
+        height: 50px;
+    }
+
     .hero-bottom-image {
-        height: 25vh;
-        min-height: 150px;
+        display: none;
     }
 }
 
 /* Tablet Portrait & Mobile Landscape (768px) */
 @media (max-width: 768px) {
     .hero-section {
-        margin-top: 70px;
         min-height: auto;
-        padding: 80px 0 60px;
+        padding: 64px 0 16px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -381,29 +396,29 @@ body {
     .hero-container {
         flex-direction: column;
         align-items: center;
-        gap: 40px;
-        padding: 0 20px;
+        gap: 24px;
+        padding: 0 10px;
         width: 100%;
     }
 
     .hero-content {
         width: 100%;
-        max-width: 600px;
+        /* max-width: 600px; */
         align-items: center;
         text-align: center;
         padding: 0;
-        order: 1;
+        order: 2;
     }
 
     .hero-title-image {
-        max-width: 85%;
-        margin-bottom: 30px;
-        height: auto;
+        max-width: 100%;
+        /* margin-bottom: 16px; */
+        /* height: auto; */
     }
 
     /* Nút CTA */
     .cta-btn-custom {
-        margin-top: 20px;
+        margin-top: 10px;
     }
 
     .cta-btn-custom img {
@@ -422,19 +437,22 @@ body {
         max-width: 500px;
         height: auto;
         min-height: auto;
-        margin-top: 0;
+        margin-top: 100px;
+        margin-bottom:-20px ;
         order: 2;
-        display: flex;
+        /* display: flex;
         justify-content: center;
-        align-items: center;
+        object-fit: cover;
+        align-items: center; */
     }
 
     .hero-section .hero-image img {
         width: 100%;
         max-width: 100%;
         height: auto;
-        max-height: 400px;
-        object-fit: contain;
+        max-height: 100vh;
+        /* object-fit: contain; */
+        object-fit: cover;
         object-position: center;
     }
 
@@ -448,13 +466,13 @@ body {
 @media (max-width: 480px) {
     .hero-section {
         margin-top: 70px;
-        padding: 60px 0 40px;
+        padding: 40px 0 28px;
         min-height: auto;
     }
 
     .hero-container {
         padding: 0 15px;
-        gap: 30px;
+        gap: 18px;
     }
 
     .hero-content {
@@ -463,11 +481,11 @@ body {
 
     .hero-title-image {
         max-width: 90%;
-        margin-bottom: 25px;
+        margin-bottom: 12px;
     }
 
     .cta-btn-custom {
-        margin-top: 15px;
+        margin-top: 8px;
     }
 
     .cta-btn-custom img {
@@ -484,7 +502,7 @@ body {
     }
 
     .hero-section .hero-image img {
-        max-height: 300px;
+        max-height: 200px;
     }
 
     /* Ảnh line dưới - Đã ẩn ở breakpoint 768px */
@@ -496,17 +514,17 @@ body {
 /* Mobile Small (360px) */
 @media (max-width: 360px) {
     .hero-section {
-        padding: 50px 0 30px;
+        padding: 36px 0 24px;
     }
 
     .hero-container {
         padding: 0 10px;
-        gap: 25px;
+        gap: 14px;
     }
 
     .hero-title-image {
         max-width: 95%;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     .cta-btn-custom img {
@@ -518,7 +536,7 @@ body {
     }
 
     .hero-section .hero-image img {
-        max-height: 250px;
+        max-height: 180px;
     }
 
     /* Ảnh line dưới - Đã ẩn ở breakpoint 768px */
@@ -1602,7 +1620,7 @@ position: relative;
   }
 }
 
-/* Tablet (1024px) */
+/* Tablet (1024px) - Dùng Hamburger Menu */
 @media (max-width: 1024px) {
   .header-container {
     padding: 0 30px;
@@ -1616,35 +1634,75 @@ position: relative;
     height: 55px;
   }
 
+  /* Hamburger Menu */
+  .hamburger-menu {
+    display: flex;
+    z-index: 1002;
+    pointer-events: auto;
+  }
+
+  .hamburger-menu:active {
+    opacity: 0.7;
+  }
+
+  /* Main Menu - Ẩn mặc định, hiện khi active */
   .main-menu {
-    position: static;
-    max-height: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: rgba(0, 30, 60, 0.98);
+    backdrop-filter: blur(10px);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    z-index: 1001;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+  }
+
+  .main-menu.active {
+    pointer-events: auto;
+    max-height: 500px;
     opacity: 1;
-    background: transparent;
-    backdrop-filter: none;
-    box-shadow: none;
-    padding: 0;
+    padding: 25px 0;
   }
 
   .main-menu ul {
-    gap: 25px;
-    flex-direction: row;
-    padding: 0;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    padding: 0 20px;
   }
 
   .main-menu li {
-    display: inline-block;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .main-menu li:last-child {
     border-bottom: none;
   }
 
   .main-menu li a {
-    font-size: 12px;
-    padding: 0;
+    display: block;
+    padding: 18px 15px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    width: 100%;
     text-align: left;
   }
 
   .main-menu li a::after {
-    display: block;
+    display: none;
+  }
+
+  .main-menu li a:hover,
+  .main-menu li.current-menu-item a {
+    color: #d4af37;
+    padding-left: 20px;
   }
 
   .hero-container,
@@ -1709,6 +1767,7 @@ position: relative;
     display: flex;
     z-index: 1002;
     pointer-events: auto;
+    
   }
   
   .hamburger-menu:active {
@@ -1739,7 +1798,7 @@ position: relative;
   .main-menu.active {
     max-height: 500px;
     opacity: 1;
-    padding: 20px 0;
+    padding: 25px 0;
   }
 
   .main-menu ul {
@@ -1761,7 +1820,7 @@ position: relative;
 
   .main-menu li a {
     display: block;
-    padding: 15px 0;
+    padding: 18px 15px;
     font-size: 14px;
     letter-spacing: 1px;
     width: 100%;
@@ -1775,7 +1834,7 @@ position: relative;
   .main-menu li a:hover,
   .main-menu li.current-menu-item a {
     color: #d4af37;
-    padding-left: 10px;
+    padding-left: 20px;
   }
 
   /* Contact Buttons - Ẩn trên mobile hoặc điều chỉnh */
@@ -2189,7 +2248,7 @@ position: relative;
   }
 
   .main-menu.active {
-    padding: 15px 0;
+    padding: 20px 0;
   }
 
   .main-menu ul {
@@ -2198,7 +2257,7 @@ position: relative;
 
   .main-menu li a {
     font-size: 13px;
-    padding: 12px 0;
+    padding: 16px 12px;
   }
 
   /* Contact Buttons */
