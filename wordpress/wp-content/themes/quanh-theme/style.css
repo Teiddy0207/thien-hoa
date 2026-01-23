@@ -414,6 +414,7 @@ body {
         max-width: 100%;
         /* margin-bottom: 16px; */
         /* height: auto; */
+        
     }
 
     /* Nút CTA */
@@ -438,7 +439,7 @@ body {
         height: auto;
         min-height: auto;
         margin-top: 100px;
-        margin-bottom:-20px ;
+        /* margin-bottom:-20px ; */
         order: 2;
         /* display: flex;
         justify-content: center;
@@ -446,14 +447,18 @@ body {
         align-items: center; */
     }
 
+    
+
+
     .hero-section .hero-image img {
         width: 100%;
         max-width: 100%;
         height: auto;
         max-height: 100vh;
-        /* object-fit: contain; */
-        object-fit: cover;
-        object-position: center;
+        object-fit: contain;
+        /* object-fit: cover; */
+        /* object-position: center; */
+        display: none;
     }
 
     /* Ảnh line dưới - Ẩn trên mobile */
@@ -1171,29 +1176,16 @@ position: relative;
   width: 50%;
 }
 
-.matbang-title h1 {
-  font-size: 48px;
-  font-weight: 800;
-  margin-bottom: 8px;
-  color: #fff;
-}
-
-.matbang-title .highlight {
-  color: #00d9ff;
-}
-
-.matbang-title .subtitle {
-  font-size: 24px;
-  color: rgba(0, 217, 255, 0.8);
-  margin-bottom: 8px;
-  font-weight: 300;
-}
-
-.matbang-title .main-title {
-  font-size: 48px;
-  font-weight: 800;
-  color: #00d9ff;
+.matbang-title {
   margin-bottom: 32px;
+  width: 85%;
+  margin-left: 50px;
+}
+
+.matbang-title img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .matbang-description {
@@ -1249,6 +1241,28 @@ position: relative;
 }
 
 /* Responsive */
+/* Tablet Landscape (1024px) */
+@media (max-width: 1024px) {
+  .matbang-title {
+    margin-bottom: 28px;
+  }
+
+  .matbang-title img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .matbang-description {
+    padding: 32px;
+  }
+
+  .matbang-description p {
+    font-size: 17px;
+    line-height: 1.7;
+  }
+}
+
+/* Tablet Portrait (968px) */
 @media (max-width: 968px) {
   .matbang-section {
     padding: 120px 0 0px 0;
@@ -1275,13 +1289,13 @@ position: relative;
     padding: 0 24px;
   }
 
-  .matbang-title h1,
-  .matbang-title .main-title {
-    font-size: 36px;
+  .matbang-title {
+    margin-bottom: 24px;
   }
 
-  .matbang-title .subtitle {
-    font-size: 20px;
+  .matbang-title img {
+    max-width: 100%;
+    height: auto;
   }
 
   .matbang-description {
@@ -1290,6 +1304,7 @@ position: relative;
 
   .matbang-description p {
     font-size: 16px;
+    line-height: 1.6;
   }
 
   .matbang-cta-button {
@@ -1664,9 +1679,10 @@ position: relative;
 
   .main-menu.active {
     pointer-events: auto;
-    max-height: 500px;
+    max-height: calc(100vh - 70px);
     opacity: 1;
     padding: 25px 0;
+    overflow-y: auto;
   }
 
   .main-menu ul {
@@ -1793,12 +1809,10 @@ position: relative;
   
   .main-menu.active {
     pointer-events: auto;
-  }
-
-  .main-menu.active {
-    max-height: 500px;
+    max-height: calc(100vh - 70px);
     opacity: 1;
     padding: 25px 0;
+    overflow-y: auto;
   }
 
   .main-menu ul {
@@ -2003,21 +2017,28 @@ position: relative;
     margin-left: 0;
   }
 
-  .matbang-title h1,
-  .matbang-title .main-title {
-    font-size: 32px;
+  .matbang-title {
+    margin-bottom: 20px;
   }
 
-  .matbang-title .subtitle {
-    font-size: 18px;
+  .matbang-title img {
+    max-width: 100%;
+    height: auto;
   }
 
   .matbang-description {
-    padding: 24px;
+    padding: 20px;
+    border-radius: 15px;
   }
 
   .matbang-description p {
-    font-size: 16px;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .matbang-description p:last-child {
+    margin-bottom: 0;
   }
 
   .matbang-cta-button {
@@ -2388,21 +2409,28 @@ position: relative;
     height: 300px;
   }
 
-  .matbang-title h1,
-  .matbang-title .main-title {
-    font-size: 28px;
+  .matbang-title {
+    margin-bottom: 16px;
   }
 
-  .matbang-title .subtitle {
-    font-size: 16px;
+  .matbang-title img {
+    max-width: 100%;
+    height: auto;
   }
 
   .matbang-description {
-    padding: 20px;
+    padding: 18px;
+    border-radius: 12px;
   }
 
   .matbang-description p {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .matbang-description p:last-child {
+    margin-bottom: 0;
   }
 
   /* Product Section */
@@ -4326,6 +4354,52 @@ body.page-vi-tri {
 
 @media (max-width: 480px) {
   body.page-vi-tri {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+
+/* Background riêng cho trang chủ */
+body.home,
+body.front-page,
+body.page-template-front-page {
+  background: url('assets/bgtrangchu.png') !important;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Responsive background cho trang chủ */
+@media (max-width: 768px) {
+  body.home,
+  body.front-page,
+  body.page-template-front-page {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+
+/* Background riêng cho trang liên hệ */
+body.page-template-page-lien-he-php,
+body.page-template-page-lien-he,
+body.page-lien-he {
+  background: url('assets/bgLienHe.png') !important;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Responsive background cho trang liên hệ */
+@media (max-width: 768px) {
+  body.page-template-page-lien-he-php,
+  body.page-template-page-lien-he,
+  body.page-lien-he {
+    background-attachment: scroll;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;

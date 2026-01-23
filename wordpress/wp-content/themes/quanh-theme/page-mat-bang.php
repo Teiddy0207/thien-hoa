@@ -28,9 +28,7 @@ get_header();
       <!-- Right: Description -->
       <div class="matbang-content">
         <div class="matbang-title">
-          <h1>Sống <span class="highlight">CẢM HỨNG</span></h1>
-          <p class="subtitle">nơi vẻ đẹp</p>
-          <h2 class="main-title">THĂNG HOA</h2>
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/matbangtext2.png" alt="Sống cảm hứng nơi vẻ đẹp thăng hoa">
         </div>
 
         <div class="matbang-description">

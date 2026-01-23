@@ -46,7 +46,7 @@ get_header();
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 30px;
-        color: #aab5c5; /* Màu xám xanh nhẹ */
+        color: #ffffff; /* Màu xám xanh nhẹ */
     }
 
     .rv-info-item {
@@ -58,7 +58,7 @@ get_header();
         display: block;
         margin-bottom: 5px;
         font-size: 16px;
-        color: #d4af37; /* Màu vàng gold giả lập */
+        color: #ffffff; /* Màu vàng gold giả lập */
     }
 
     .rv-info-text {
@@ -135,11 +135,12 @@ get_header();
 
     .rv-submit-btn {
         display: inline-block;
+        /* justify-content: flex-end; */
         margin-top: 10px;
         padding: 12px 30px;
         background: transparent;
         border: 1px solid #d4af37;
-        color: #d4af37;
+        color: #ffffff;
         font-weight: bold;
         text-transform: uppercase;
         cursor: pointer;
@@ -159,6 +160,11 @@ get_header();
         font-style: italic;
         color: #7a8b9c;
         text-align: center;
+    }
+    .rv-info-icon-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     /* Responsive cho mobile */
@@ -190,24 +196,44 @@ get_header();
 </style>
 <section class="contact-rivera-section">
     <div class="rv-container">
+                                <div class="rv-info-title">THÔNG TIN LIÊN HỆ:</div>
+
         <div class="rv-row">
             
+
             <div class="rv-col-info">
-                <div class="rv-info-title">THÔNG TIN LIÊN HỆ:</div>
 
                 <div class="rv-info-item">
-                    <span class="rv-info-label">📍 Địa chỉ dự án:</span>
+
+
+                <div class="rv-info-icon-wrapper">
+                    <div class="rv-info-icon">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan6.png" alt="">
+                    </div>
+                    <div>
+                    <span class="rv-info-label">Địa chỉ dự án:</span>
                     <div class="rv-info-text">
                         Ấp Phú Long, Xã Tân Phú Đông,<br>
                         Thành phố Sa Đéc, Tỉnh Đồng Tháp
                     </div>
+                    </div>
+                    </div>
+
                 </div>
 
                 <div class="rv-info-item">
-                    <span class="rv-info-label">📞 Hotline CSKH:</span>
+                    <div class="rv-info-icon-wrapper">
+                 <div class="rv-info-icon">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/calllienhe.png" alt="">
+                    </div>
+
+                    <div>
+                    <span class="rv-info-label">Hotline CSKH:</span>
                     <div class="rv-info-text">
                         0909.xxx.xxx (Liên hệ trực tiếp)
                     </div>
+</div>
+</div>
                 </div>
 
                 <div class="rv-info-item">

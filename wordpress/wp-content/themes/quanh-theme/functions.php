@@ -6,6 +6,38 @@ register_nav_menus([
   'header' => 'Header Menu'
 ]);
 
+// Fallback menu tự động nếu menu chưa được cấu hình
+function quanh_fallback_menu() {
+  $pages = [
+    ['title' => 'Trang chủ', 'slug' => ''],
+    ['title' => 'Tổng quan', 'slug' => 'tong-quan'],
+    ['title' => 'Vị trí', 'slug' => 'vi-tri'],
+    ['title' => 'Mặt bằng', 'slug' => 'mat-bang'],
+    ['title' => 'Ưu thế', 'slug' => 'uu-the'],
+    ['title' => 'Thư viện', 'slug' => 'thu-vien'],
+    ['title' => 'Tin tức', 'slug' => 'tin-tuc'],
+    ['title' => 'Liên hệ', 'slug' => 'lien-he']
+  ];
+  
+  echo '<ul class="menu">';
+  foreach ($pages as $page) {
+    $url = home_url('/' . ($page['slug'] ? $page['slug'] : ''));
+    $current = '';
+    
+    // Kiểm tra trang hiện tại
+    if (is_front_page() && $page['slug'] === '') {
+      $current = ' current-menu-item';
+    } elseif (is_page($page['slug'])) {
+      $current = ' current-menu-item';
+    }
+    
+    echo '<li class="menu-item' . $current . '">';
+    echo '<a href="' . esc_url($url) . '">' . esc_html($page['title']) . '</a>';
+    echo '</li>';
+  }
+  echo '</ul>';
+}
+
 function quanh_enqueue_styles() {
   wp_enqueue_style(
     'quanh-style',

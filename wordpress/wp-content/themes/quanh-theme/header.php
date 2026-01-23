@@ -24,14 +24,15 @@
     </button>
 
     <nav class="main-menu" id="mainMenu">
-      <ul class="menu"> 
       <?php
-        wp_nav_menu([
+        $menu_args = [
           'theme_location' => 'header',
-          'container' => false
-        ]);
+          'container' => false,
+          'fallback_cb' => 'quanh_fallback_menu',
+          'items_wrap' => '<ul class="menu">%3$s</ul>'
+        ];
+        wp_nav_menu($menu_args);
       ?>
-      </ul>
     </nav>
 
   </div>
