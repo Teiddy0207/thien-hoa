@@ -391,33 +391,29 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        margin-top: 0;
     }
 
     .hero-container {
         flex-direction: column;
         align-items: center;
         gap: 24px;
-        padding: 0 10px;
+        padding: 0 16px;
         width: 100%;
     }
 
     .hero-content {
         width: 100%;
-        /* max-width: 600px; */
         align-items: center;
         text-align: center;
         padding: 0;
-        order: 2;
+        order: 1;
     }
 
     .hero-title-image {
         max-width: 100%;
-        /* margin-bottom: 16px; */
-        /* height: auto; */
-        
     }
 
-    /* Nút CTA */
     .cta-btn-custom {
         margin-top: 10px;
     }
@@ -431,37 +427,32 @@ body {
         font-size: 15px;
     }
 
-    /* Ảnh tòa nhà */
+    /* Ảnh tòa nhà: hiện trên mobile, xếp dưới nội dung */
     .hero-section .hero-image {
         position: relative;
         width: 100%;
         max-width: 500px;
         height: auto;
         min-height: auto;
-        margin-top: 100px;
-        /* margin-bottom:-20px ; */
+        margin-top: 24px;
         order: 2;
-        /* display: flex;
+        display: flex;
         justify-content: center;
-        object-fit: cover;
-        align-items: center; */
+        align-items: center;
+        display: none;
     }
-
-    
-
 
     .hero-section .hero-image img {
         width: 100%;
         max-width: 100%;
         height: auto;
-        max-height: 100vh;
+        max-height: 50vh;
+        max-height: 50dvh;
         object-fit: contain;
-        /* object-fit: cover; */
-        /* object-position: center; */
-        display: none;
+        object-position: center bottom;
+        display: block;
     }
 
-    /* Ảnh line dưới - Ẩn trên mobile */
     .hero-bottom-image {
         display: none;
     }
@@ -470,14 +461,14 @@ body {
 /* Mobile Portrait (480px) */
 @media (max-width: 480px) {
     .hero-section {
-        margin-top: 70px;
-        padding: 40px 0 28px;
+        margin-top: 0;
+        padding: 56px 0 24px;
         min-height: auto;
     }
 
     .hero-container {
-        padding: 0 15px;
-        gap: 18px;
+        padding: 0 16px;
+        gap: 20px;
     }
 
     .hero-content {
@@ -485,12 +476,12 @@ body {
     }
 
     .hero-title-image {
-        max-width: 90%;
-        margin-bottom: 12px;
+        max-width: 92%;
+        margin-bottom: 16px;
     }
 
     .cta-btn-custom {
-        margin-top: 8px;
+        margin-top: 12px;
     }
 
     .cta-btn-custom img {
@@ -503,14 +494,14 @@ body {
 
     .hero-section .hero-image {
         max-width: 100%;
-        margin-top: 0;
+        margin-top: 16px;
     }
 
     .hero-section .hero-image img {
-        max-height: 200px;
+        max-height: 42vh;
+        max-height: 42dvh;
     }
 
-    /* Ảnh line dưới - Đã ẩn ở breakpoint 768px */
     .hero-bottom-image {
         display: none;
     }
@@ -519,21 +510,21 @@ body {
 /* Mobile Small (360px) */
 @media (max-width: 360px) {
     .hero-section {
-        padding: 36px 0 24px;
+        padding: 48px 0 20px;
     }
 
     .hero-container {
-        padding: 0 10px;
-        gap: 14px;
+        padding: 0 12px;
+        gap: 16px;
     }
 
     .hero-title-image {
         max-width: 95%;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
 
     .cta-btn-custom img {
-        height: 40px;
+        height: 42px;
     }
 
     .cta-text {
@@ -541,10 +532,54 @@ body {
     }
 
     .hero-section .hero-image img {
-        max-height: 180px;
+        max-height: 38vh;
+        max-height: 38dvh;
+    }
+}
+
+/* ========== Điện thoại thật (mobile-first cho màn hình nhỏ) ========== */
+@media (max-width: 430px) {
+    .hero-section {
+        padding-top: max(56px, env(safe-area-inset-top));
+        padding-bottom: max(24px, env(safe-area-inset-bottom));
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
     }
 
-    /* Ảnh line dưới - Đã ẩn ở breakpoint 768px */
+    .hero-container {
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+    }
+
+    .hero-title-image {
+        max-width: 88%;
+    }
+
+    .cta-btn-custom {
+        min-height: 44px;
+        padding: 8px 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cta-btn-custom img {
+        height: 44px;
+    }
+}
+
+@media (max-width: 390px) {
+    .hero-section {
+        padding-top: max(52px, env(safe-area-inset-top));
+    }
+
+    .hero-title-image {
+        max-width: 90%;
+    }
+
+    .cta-text {
+        font-size: 13px;
+    }
 }
 
 
@@ -1758,9 +1793,10 @@ position: relative;
 
 /* Mobile Landscape & Tablet Portrait (768px) */
 @media (max-width: 768px) {
-  /* Header */
+  /* Header - padding top cho notch/safe-area trên điện thoại */
   .site-header {
     padding: 15px 0;
+    padding-top: max(15px, env(safe-area-inset-top));
     background: rgba(0, 30, 60, 0.95);
     backdrop-filter: blur(10px);
   }
@@ -1768,6 +1804,8 @@ position: relative;
   .header-container {
     position: relative;
     padding: 0 20px;
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
   }
 
   .logo {
@@ -1790,10 +1828,10 @@ position: relative;
     opacity: 0.7;
   }
 
-  /* Main Menu - Ẩn mặc định trên mobile */
+  /* Main Menu - Ẩn mặc định trên mobile, dưới header + safe-area */
   .main-menu {
     position: fixed;
-    top: 70px;
+    top: calc(70px + env(safe-area-inset-top, 0px));
     left: 0;
     right: 0;
     background: rgba(0, 30, 60, 0.98);
@@ -1809,9 +1847,11 @@ position: relative;
   
   .main-menu.active {
     pointer-events: auto;
-    max-height: calc(100vh - 70px);
+    max-height: calc(100vh - 70px - env(safe-area-inset-top, 0px));
+    max-height: calc(100dvh - 70px - env(safe-area-inset-top, 0px));
     opacity: 1;
     padding: 25px 0;
+    padding-bottom: max(25px, env(safe-area-inset-bottom));
     overflow-y: auto;
   }
 
@@ -1833,11 +1873,14 @@ position: relative;
   }
 
   .main-menu li a {
-    display: block;
-    padding: 18px 15px;
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
     font-size: 14px;
     letter-spacing: 1px;
     width: 100%;
+    min-height: 48px;
+    box-sizing: border-box;
     text-align: left;
   }
 
@@ -1851,11 +1894,11 @@ position: relative;
     padding-left: 20px;
   }
 
-  /* Contact Buttons - Ẩn trên mobile hoặc điều chỉnh */
+  /* Contact Buttons - Điện thoại: góc dưới phải, tránh safe-area */
   .contact-buttons {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    right: max(16px, env(safe-area-inset-right));
     top: auto;
     transform: none;
     flex-direction: row;
@@ -1866,12 +1909,14 @@ position: relative;
   .contact-column {
     width: 40px;
     height: 120px;
-    display: none; /* Ẩn cột text trên mobile */
+    display: none;
   }
 
   .contact-call {
     width: 50px;
     height: 50px;
+    min-width: 48px;
+    min-height: 48px;
   }
 
   /* Hero Section - Đã được xử lý ở phần responsive riêng phía trên */
@@ -2278,19 +2323,25 @@ position: relative;
 
   .main-menu li a {
     font-size: 13px;
-    padding: 16px 12px;
+    padding: 16px 20px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
   }
 
-  /* Contact Buttons */
+  /* Contact Buttons - điện thoại: safe-area + touch target 48px */
   .contact-buttons {
-    bottom: 15px;
-    right: 15px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    right: max(12px, env(safe-area-inset-right));
     gap: 8px;
   }
 
   .contact-call {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
   }
 
   /* Hero Section - Đã được xử lý ở phần responsive riêng phía trên */
