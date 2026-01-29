@@ -49,6 +49,15 @@ function quanh_enqueue_styles() {
 add_action('wp_enqueue_scripts', 'quanh_enqueue_styles');
 
 function quanh_enqueue_scripts() {
+  /* Hamburger menu: load trong head để vẫn chạy khi trang không gọi get_footer() */
+  wp_enqueue_script(
+    'quanh-hamburger-menu',
+    get_template_directory_uri() . '/assets/js/hamburger-menu.js',
+    array(),
+    '1.0',
+    false
+  );
+
   wp_enqueue_script(
     'news-load-more',
     get_template_directory_uri() . '/assets/js/news-load-more.js',

@@ -12,16 +12,22 @@ Version: 1.0
 
 body {
   margin: 0;
-  /* font-family: 'Segoe UI', Arial, sans-serif; */
-   font-family: 'Be Vietnam Pro', Arial, sans-serif;
-  /* background: linear-gradient(135deg, #001f3f 0%, #003d5c 30%, #004d73 60%, #003d5c 100%); */
+  font-family: 'Be Vietnam Pro', Arial, sans-serif;
   background: url('assets/bg.svg');
-  background-attachment: fixed; /* Giữ gradient cố định khi scroll */
+  background-attachment: fixed;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
   color: #ffffff;
+  /* Sticky footer: không còn phần thừa dưới footer trên trang chủ / trang ngắn */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Phần nội dung chính (hero, overview, ...) tự giãn chiếm chỗ trống, đẩy footer xuống đáy */
+body > section {
+  flex: 1 0 auto;
 }
 
 /* HEADER */
@@ -439,7 +445,6 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        display: none;
     }
 
     .hero-section .hero-image img {
@@ -495,6 +500,7 @@ body {
     .hero-section .hero-image {
         max-width: 100%;
         margin-top: 16px;
+        display: none;
     }
 
     .hero-section .hero-image img {
@@ -819,13 +825,14 @@ position: relative;
   display: block;
 }
 
-/* FOOTER */
+/* FOOTER - nền cố định để không bị màu lạ từ body/background trang (đặc biệt mobile trang Tổng quan) */
 .site-footer {
-  /* background: rgba(0, 30, 60, 0.95); */
-  /* padding: 30px 0; */
+  background: rgba(0, 30, 60, 0.98);
+  padding: 24px 0;
   text-align: center;
   color: rgba(255, 255, 255, 0.8);
-  /* margin-top: 40px; */
+  margin-top: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .footer-container {
@@ -2281,11 +2288,12 @@ position: relative;
 
   /* Footer */
   .site-footer {
-    /* padding: 30px 20px; */
+    padding: 20px 0;
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
   }
 
   .footer-container {
-    /* padding: 0 20px; */
+    padding: 0 20px;
   }
 }
 
@@ -2628,8 +2636,13 @@ position: relative;
 
   /* Footer */
   .site-footer {
-    padding: 20px 15px;
+    padding: 16px 15px;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
     font-size: 14px;
+  }
+
+  .footer-container {
+    padding: 0 15px;
   }
 }
 
@@ -4450,6 +4463,33 @@ body.page-lien-he {
   body.page-template-page-lien-he-php,
   body.page-template-page-lien-he,
   body.page-lien-he {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+
+/* Trang Tổng quan: ảnh nền tràn xuống cả footer */
+body.page-template-page-tong-quan-php,
+body.page-tong-quan {
+  background: url('assets/bgtongquan.png') !important;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Trang Tổng quan: footer trong suốt để nền tràn xuống */
+body.page-template-page-tong-quan-php .site-footer,
+body.page-tong-quan .site-footer {
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  body.page-template-page-tong-quan-php,
+  body.page-tong-quan {
     background-attachment: scroll;
     background-size: cover;
     background-position: center center;

@@ -163,8 +163,6 @@ $news_query = new WP_Query([
   </div>
 </section>
 
-<?php get_footer(); ?>
-<?php get_footer(); ?>
 
 
 
