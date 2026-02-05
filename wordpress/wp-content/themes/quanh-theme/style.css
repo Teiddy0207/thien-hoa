@@ -4481,7 +4481,7 @@ background: linear-gradient(
   left: 0;
   right: 0;
   height: 2px;
-  background: #00d9ff;
+background: linear-gradient(90deg, #ff0000, #ff6a00);
 }
 
 /* Gallery Section */
