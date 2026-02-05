@@ -9,21 +9,23 @@ get_header();
 <style>
     /* Tổng thể section */
     .contact-rivera-section {
-        /* background: linear-gradient(135deg, #021226 0%, #062a4d 100%); */
         color: #fff;
-        padding: 150px 0 60px;
+        padding: 150px 40px 60px;
         margin-top: 70px;
         font-family: 'Segoe UI', sans-serif;
-        min-height: 80vh; /* Đảm bảo full màn hình */
+        min-height: 80vh;
         display: flex;
         align-items: center;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .rv-container {
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
-        padding: 0 15px;
+        padding: 0 170px;
         width: 100%;
+        box-sizing: border-box;
     }
 
     .rv-row {
@@ -31,14 +33,15 @@ get_header();
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: flex-start;
+        gap: 24px;
     }
 
     /* Cột bên trái: Thông tin */
     .rv-col-info {
-        flex: 1;
-        min-width: 300px;
-        padding-right: 40px;
-        margin-bottom: 40px;
+        flex: 1 1 420px;
+        min-width: 0;
+        padding: 32px 24px 32px 0;
+        margin-bottom: 0;
     }
 
     .rv-info-title {
@@ -79,10 +82,11 @@ get_header();
 
     /* Cột bên phải: Form */
     .rv-col-form {
-        flex: 0 0 500px;
+        flex: 0 0 540px;
+        min-width: 0;
         max-width: 100%;
-        background: rgba(0, 30, 60, 0.6); /* Nền tối trong suốt */
-        padding: 40px;
+        background: rgba(0, 30, 60, 0.6);
+        padding: 48px 44px;
         border-radius: 10px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         border: 1px solid rgba(255,255,255,0.1);
@@ -172,30 +176,52 @@ get_header();
         gap: 10px;
     }
 
+    /* Responsive cho tablet */
+    @media (max-width: 1024px) {
+        .contact-rivera-section {
+            padding: 130px 24px 50px;
+        }
+        .rv-container {
+            padding: 0 16px;
+        }
+        .rv-col-info {
+            padding-right: 0;
+        }
+    }
+
     /* Responsive cho mobile */
     @media (max-width: 768px) {
         .contact-rivera-section {
-            padding: 120px 0 40px;
+            padding: 120px 20px 40px;
             margin-top: 70px;
         }
-        
+        .rv-container {
+            padding: 0 16px;
+        }
         .rv-row {
             flex-direction: column;
+            gap: 24px;
+        }
+        .rv-col-info {
+            margin-bottom: 24px;
         }
         .rv-col-form {
-            flex: 1;
+            flex: 1 1 auto;
             width: 100%;
-            padding: 20px;
+            padding: 24px 20px;
         }
         .rv-form-row-dual {
             flex-direction: column;
             gap: 0;
         }
     }
-    
+
     @media (max-width: 480px) {
         .contact-rivera-section {
-            padding: 100px 0 30px;
+            padding: 100px 16px 30px;
+        }
+        .rv-container {
+            padding: 0 12px;
         }
     }
 </style>

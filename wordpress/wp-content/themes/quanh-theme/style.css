@@ -1,4 +1,4 @@
-/*
+﻿/*
 Theme Name: Rivera Thiên Hoa
 Author: Quanh
 Version: 1.0
@@ -2804,16 +2804,20 @@ position: relative;
   }
 
   .rv-container {
-    padding: 0 15px;
+    padding: 0 100px;
+  }
+
+  .rv-row {
+    gap: 40px;
   }
 
   .rv-col-info {
-    padding-right: 0;
-    margin-bottom: 30px;
+    padding: 28px 16px 28px 0;
+    margin-bottom: 0;
   }
 
   .rv-col-form {
-    padding: 30px 20px;
+    padding: 40px 28px;
   }
 
   .rv-form-title {
