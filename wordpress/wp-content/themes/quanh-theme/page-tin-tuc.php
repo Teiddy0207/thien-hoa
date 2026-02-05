@@ -139,12 +139,12 @@ $right_query = new WP_Query([
     </div>
 
     <!-- Load thêm (AJAX) -->
-    <div id="news-load-more-container" class="news-load-more-container"></div>
+    <!-- <div id="news-load-more-container" class="news-load-more-container"></div>
     <?php if ( $right_max_pages > 1 ) : ?>
     <div class="news-load-more-actions">
       <button type="button" class="news-load-more-btn" id="news-load-more-btn" data-current="1" data-max="<?php echo (int) $right_max_pages; ?>" data-label="Xem thêm tin tức" data-loading="Đang tải...">Xem thêm tin tức</button>
       <p class="news-load-more-end" id="news-load-more-end" style="display:none;">Đã xem hết tin tức</p>
-    </div>
+    </div> -->
     <?php endif; ?>
 
     <!-- Pagination (chỉ cho cột phải) -->

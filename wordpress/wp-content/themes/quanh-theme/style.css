@@ -1383,6 +1383,7 @@ position: relative;
   margin-left: calc(-50vw + 50%); /* Đẩy ra ngoài bên trái */
 }
 
+
 .matbang-image-wrapper {
   position: relative;
   width: 100%;
@@ -1394,8 +1395,7 @@ position: relative;
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
-  object-position: center;
+
 }
 
 
@@ -4083,7 +4083,7 @@ position: relative;
   max-width: 100%;
   height: auto;
   border-radius: 10px;
-  margin: 30px 0;
+  margin: 10px 0;
 }
 
 .post-content ul,
@@ -4458,7 +4458,7 @@ position: relative;
   left: 0;
   right: 0;
   height: 2px;
-  background: #00d9ff;
+  background: linear-gradient(90deg, #ff4d4d, #e80101, #b30000);
 }
 
 /* Gallery Section */
