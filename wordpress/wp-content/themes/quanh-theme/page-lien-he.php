@@ -42,11 +42,13 @@ get_header();
     }
 
     .rv-info-title {
+        font-family: 'Be Vietnam Pro', Arial, sans-serif;
+        font-weight: 400;
         font-size: 18px;
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 30px;
-        color: #ffffff; /* Màu xám xanh nhẹ */
+        color: #ffffff;
     }
 
     .rv-info-item {
@@ -54,14 +56,17 @@ get_header();
     }
 
     .rv-info-label {
-        font-weight: bold;
+        font-family: 'Be Vietnam Pro', Arial, sans-serif;
+        font-weight: 500;
         display: block;
         margin-bottom: 5px;
         font-size: 16px;
-        color: #ffffff; /* Màu vàng gold giả lập */
+        color: #ffffff;
     }
 
     .rv-info-text {
+        font-family: 'Be Vietnam Pro', Arial, sans-serif;
+        font-weight: 300;
         font-size: 15px;
         line-height: 1.6;
         color: #ffffff;
@@ -213,8 +218,7 @@ get_header();
                     <div>
                     <span class="rv-info-label">Địa chỉ dự án:</span>
                     <div class="rv-info-text">
-                        Ấp Phú Long, Xã Tân Phú Đông,<br>
-                        Thành phố Sa Đéc, Tỉnh Đồng Tháp
+                        Xã Tân Dương, Tỉnh Đồng Tháp.<br>
                     </div>
                     </div>
                     </div>
@@ -280,7 +284,7 @@ get_header();
 
         </div>
         
-        <div style="margin-top: 40px; font-size: 11px; color: #5a6b7c; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+        <div style="margin-top: 40px; font-family: 'Be Vietnam Pro', Arial, sans-serif; font-weight: 300; font-style: italic; font-size: 11px; color: #5a6b7c; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
             * Thông tin, hình ảnh, các tiện ích trên website chỉ mang tính chất tương đối và có thể được điều chỉnh theo quyết định của Chủ đầu tư tại từng thời điểm.
         </div>
     </div>

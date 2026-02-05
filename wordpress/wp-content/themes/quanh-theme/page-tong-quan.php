@@ -26,7 +26,7 @@ get_header();
         <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan2.png" alt=""></div>
         <div class="info-details">
           <div class="info-label">Vị trí:</div>
-          <div class="info-value">ẤP PHÚ LONG, XÃ TÂN PHÚ ĐÔNG,<br>TP. SA ĐÉC, TỈNH ĐỒNG THÁP</div>
+          <div class="info-value">XÃ TÂN DƯƠNG, TỈNH ĐỒNG THÁP</div>
         </div>
       </div>
 
@@ -35,7 +35,7 @@ get_header();
         <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan3.png" alt=""></div>
         <div class="info-details">
           <div class="info-label">Chủ Đầu tư:</div>
-          <div class="info-value">CÔNG TY TNHH THƯƠNG MẠI<br>ĐẦU TƯ XÂY DỰNG<br>DTK LAND SA ĐÉC (DTK LAND)</div>
+          <div class="info-value">CÔNG TY TNHH THƯƠNG MẠI<br>ĐẦU TƯ XÂY DỰNG<br>ĐTK LAND SA ĐÉC (DTK LAND)</div>
         </div>
       </div>
 

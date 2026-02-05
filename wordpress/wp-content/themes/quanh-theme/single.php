@@ -15,7 +15,11 @@ get_header();
     
     <!-- Post Header -->
     <div class="post-header">
-      <div class="post-meta">
+    
+      
+      <h1 class="post-title"><?php the_title(); ?></h1>
+
+        <div class="post-meta">
         <span class="post-date"><?php echo get_the_date('d/m/Y'); ?></span>
         <?php
         $categories = get_the_category();
@@ -26,8 +30,6 @@ get_header();
           </span>
         <?php endif; ?>
       </div>
-      
-      <h1 class="post-title"><?php the_title(); ?></h1>
     </div>
 
     <!-- Featured Image -->

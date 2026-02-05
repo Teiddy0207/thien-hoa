@@ -70,10 +70,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  function updateSlide() {
-    infoText.textContent = descriptions[currentSlide];
-    
-    dots.forEach((dot, idx) => {
+  function updateSlide(animate) {
+    if (animate) {
+      infoText.classList.add('is-changing');
+      setTimeout(function() {
+        infoText.textContent = descriptions[currentSlide];
+        infoText.classList.remove('is-changing');
+      }, 300);
+    } else {
+      infoText.textContent = descriptions[currentSlide];
+    }
+
+    dots.forEach(function(dot, idx) {
       dot.classList.toggle('active', idx === currentSlide);
     });
 
@@ -81,24 +89,26 @@ document.addEventListener('DOMContentLoaded', function() {
     nextBtn.disabled = currentSlide === descriptions.length - 1;
   }
 
-  prevBtn.addEventListener('click', () => {
+  prevBtn.addEventListener('click', function() {
     if (currentSlide > 0) {
       currentSlide--;
-      updateSlide();
+      updateSlide(true);
     }
   });
 
-  nextBtn.addEventListener('click', () => {
+  nextBtn.addEventListener('click', function() {
     if (currentSlide < descriptions.length - 1) {
       currentSlide++;
-      updateSlide();
+      updateSlide(true);
     }
   });
 
-  dots.forEach((dot, idx) => {
-    dot.addEventListener('click', () => {
-      currentSlide = idx;
-      updateSlide();
+  dots.forEach(function(dot, idx) {
+    dot.addEventListener('click', function() {
+      if (currentSlide !== idx) {
+        currentSlide = idx;
+        updateSlide(true);
+      }
     });
   });
 });

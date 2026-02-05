@@ -69,20 +69,49 @@ function quanh_enqueue_scripts() {
     'ajaxurl' => admin_url('admin-ajax.php'),
     'nonce'   => wp_create_nonce('news_load_more'),
   ));
+
+  wp_enqueue_script(
+    'news-pagination-ajax',
+    get_template_directory_uri() . '/assets/js/news-pagination-ajax.js',
+    array(),
+    '1.0',
+    true
+  );
+  $news_page_url = home_url('/');
+  $pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'page-tin-tuc.php'));
+  if (!empty($pages)) {
+    $news_page_url = get_permalink($pages[0]->ID);
+  }
+  wp_localize_script('news-pagination-ajax', 'newsPagination', array(
+    'baseUrl'  => preg_replace('#\?paged=\d+#', '', preg_replace('#/page/\d+/?#', '/', $news_page_url)),
+    'ajaxurl'  => admin_url('admin-ajax.php'),
+    'nonce'    => wp_create_nonce('news_load_more'),
+  ));
 }
 add_action('wp_enqueue_scripts', 'quanh_enqueue_scripts');
 
 /**
- * AJAX: Load thêm tin tức (trang Tin tức)
+ * AJAX: Load thêm tin tức (chỉ cột phải – 3 bài/trang, bỏ qua bài featured)
  */
 function quanh_ajax_news_load_more() {
   check_ajax_referer('news_load_more', 'nonce');
   $paged = max(1, (int) (isset($_POST['paged']) ? $_POST['paged'] : 0));
+  $per_page = 3;
+  $offset   = 1 + ($paged - 1) * $per_page;
+
+  $count = new WP_Query(array(
+    'post_type'      => 'post',
+    'posts_per_page' => -1,
+    'fields'         => 'ids',
+  ));
+  $total = (int) $count->found_posts;
+  wp_reset_postdata();
+  $right_max_pages = $total > 1 ? (int) ceil(($total - 1) / $per_page) : 0;
 
   $q = new WP_Query(array(
     'post_type'      => 'post',
-    'posts_per_page' => 4,
-    'paged'          => $paged,
+    'posts_per_page' => $per_page,
+    'offset'         => $offset,
     'orderby'        => 'date',
     'order'          => 'DESC',
   ));
@@ -120,11 +149,96 @@ function quanh_ajax_news_load_more() {
   wp_reset_postdata();
   $html = ob_get_clean();
 
-  $max = isset($q->max_num_pages) ? (int) $q->max_num_pages : 1;
-  wp_send_json_success(array('html' => $html, 'has_more' => $paged < $max));
+  wp_send_json_success(array('html' => $html, 'has_more' => $paged < $right_max_pages));
 }
 add_action('wp_ajax_news_load_more', 'quanh_ajax_news_load_more');
 add_action('wp_ajax_nopriv_news_load_more', 'quanh_ajax_news_load_more');
+
+/**
+ * AJAX: Phân trang tin tức (chỉ cột phải, không reload trang)
+ */
+function quanh_ajax_news_pagination() {
+  check_ajax_referer('news_load_more', 'nonce');
+  $paged = max(1, (int) (isset($_POST['paged']) ? $_POST['paged'] : 0));
+  $per_page = 3;
+  $offset   = 1 + ($paged - 1) * $per_page;
+
+  $count = new WP_Query(array(
+    'post_type'      => 'post',
+    'posts_per_page' => -1,
+    'fields'         => 'ids',
+  ));
+  $total = (int) $count->found_posts;
+  wp_reset_postdata();
+  $right_max_pages = $total > 1 ? (int) ceil(($total - 1) / $per_page) : 0;
+
+  $q = new WP_Query(array(
+    'post_type'      => 'post',
+    'posts_per_page' => $per_page,
+    'offset'         => $offset,
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+  ));
+
+  ob_start();
+  if ($q->have_posts()) {
+    while ($q->have_posts()) {
+      $q->the_post();
+      $thumb = '';
+      if (has_post_thumbnail()) {
+        $url = wp_get_attachment_image_url(get_post_thumbnail_id(), 'medium');
+        if ($url) $thumb = '<img src="' . esc_url($url) . '" alt="' . esc_attr(get_the_title()) . '">';
+      }
+      if (!$thumb) {
+        $content = get_the_content();
+        if (preg_match('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $m)) {
+          $thumb = '<img src="' . esc_url($m[1]) . '" alt="' . esc_attr(get_the_title()) . '">';
+        } else {
+          $thumb = '<div style="background:linear-gradient(135deg,#003d5c,#001f3f);width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);font-size:12px;">Không có ảnh</div>';
+        }
+      }
+      echo '<a href="' . esc_url(get_permalink()) . '" class="post-item">';
+      echo '<div class="post-thumbnail">' . $thumb . '</div>';
+      echo '<div class="post-info">';
+      echo '<div class="post-date">' . esc_html(get_the_date('d/m/Y')) . '</div>';
+      echo '<h3>' . get_the_title() . '</h3>';
+      echo '<span class="read-more"><span>Đọc thêm</span><span>→</span></span>';
+      echo '</div></a>';
+    }
+  }
+  wp_reset_postdata();
+  $posts_html = ob_get_clean();
+
+  $news_page_url = home_url('/');
+  $pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'page-tin-tuc.php'));
+  if (!empty($pages)) {
+    $news_page_url = get_permalink($pages[0]->ID);
+  }
+  $base = $news_page_url . (strpos($news_page_url, '?') !== false ? '&' : '?') . 'paged=%#%';
+  $pagination_html = '';
+  if ($right_max_pages > 1) {
+    $pagination_html = paginate_links(array(
+      'base'      => $base,
+      'format'    => '',
+      'current'   => $paged,
+      'total'     => $right_max_pages,
+      'prev_text' => '← Trước',
+      'next_text' => 'Sau →',
+      'type'      => 'plain',
+      'end_size'  => 1,
+      'mid_size'  => 2,
+    ));
+  }
+
+  wp_send_json_success(array(
+    'posts_html'      => $posts_html,
+    'pagination_html' => $pagination_html,
+    'paged'           => $paged,
+    'max_pages'       => $right_max_pages,
+  ));
+}
+add_action('wp_ajax_news_pagination', 'quanh_ajax_news_pagination');
+add_action('wp_ajax_nopriv_news_pagination', 'quanh_ajax_news_pagination');
 
 
 // --- BẮT ĐẦU COPY TỪ ĐÂY ---

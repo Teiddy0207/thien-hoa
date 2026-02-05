@@ -5,22 +5,43 @@ Template Name: Tin Tức
 get_header();
 
 // Trên Page template, get_query_var('page'/'paged') thường không có với /page/2/;
-// dùng ?paged= và $_GET là chắc chắn nhất.
 $paged = (int) get_query_var( 'paged' );
 if ( $paged < 1 ) $paged = (int) get_query_var( 'page' );
 if ( $paged < 1 && isset( $_GET['paged'] ) ) $paged = max( 1, (int) $_GET['paged'] );
 if ( $paged < 1 ) $paged = 1;
 
-// Lưu URL trang Tin tức TRƯỚC khi chạy WP_Query; sau loop get_permalink() sẽ trả về bài viết cuối.
 $news_page_url = get_permalink( get_queried_object_id() );
 if ( ! $news_page_url ) $news_page_url = get_permalink();
 
-$news_query = new WP_Query([
+// Đếm tổng số bài để tính số trang cho cột phải (trừ 1 bài featured).
+$count_query = new WP_Query([
   'post_type'      => 'post',
-  'posts_per_page' => 4,
-  'paged'         => $paged,
-  'orderby'       => 'date',
-  'order'         => 'DESC'
+  'posts_per_page' => -1,
+  'fields'         => 'ids',
+  'orderby'        => 'date',
+  'order'          => 'DESC'
+]);
+$total_posts   = (int) $count_query->found_posts;
+$posts_per_page_right = 3;
+$right_max_pages = $total_posts > 1 ? (int) ceil( ( $total_posts - 1 ) / $posts_per_page_right ) : 0;
+wp_reset_postdata();
+
+// Featured: luôn bài mới nhất (1 bài).
+$featured_query = new WP_Query([
+  'post_type'      => 'post',
+  'posts_per_page' => 1,
+  'orderby'        => 'date',
+  'order'          => 'DESC'
+]);
+
+// Cột phải: 3 bài/trang, phân trang (bỏ qua bài đầu đã dùng làm featured).
+$right_offset = 1 + ( $paged - 1 ) * $posts_per_page_right;
+$right_query = new WP_Query([
+  'post_type'      => 'post',
+  'posts_per_page' => $posts_per_page_right,
+  'offset'         => $right_offset,
+  'orderby'        => 'date',
+  'order'          => 'DESC'
 ]);
 ?>
 
@@ -33,11 +54,11 @@ $news_query = new WP_Query([
     <!-- Main Layout -->
     <div class="news-layout">
       
-      <!-- Left: Featured Post (bài đầu tiên) -->
+      <!-- Left: Featured Post (luôn bài mới nhất) -->
       <div class="featured-post">
         <?php
-        if ( $news_query->have_posts() ) :
-          $news_query->the_post();
+        if ( $featured_query->have_posts() ) :
+          $featured_query->the_post();
         ?>
           <a href="<?php the_permalink(); ?>" class="featured-card">
             <div class="featured-image">
@@ -75,10 +96,10 @@ $news_query = new WP_Query([
         <?php endif; ?>
       </div>
 
-      <!-- Right: Post List (3 bài tiếp theo) -->
-      <div class="post-list">
+      <!-- Right: Post List (3 bài/trang, chỉ cột phải phân trang) -->
+      <div id="news-post-list" class="post-list">
         <?php
-        while ( $news_query->have_posts() ) : $news_query->the_post();
+        while ( $right_query->have_posts() ) : $right_query->the_post();
         ?>
           <a href="<?php the_permalink(); ?>" class="post-item">
             <div class="post-thumbnail">
@@ -119,25 +140,25 @@ $news_query = new WP_Query([
 
     <!-- Load thêm (AJAX) -->
     <div id="news-load-more-container" class="news-load-more-container"></div>
-    <?php if ( $news_query->max_num_pages > 1 ) : ?>
+    <?php if ( $right_max_pages > 1 ) : ?>
     <div class="news-load-more-actions">
-      <button type="button" class="news-load-more-btn" id="news-load-more-btn" data-current="1" data-max="<?php echo (int) $news_query->max_num_pages; ?>" data-label="Xem thêm tin tức" data-loading="Đang tải...">Xem thêm tin tức</button>
+      <button type="button" class="news-load-more-btn" id="news-load-more-btn" data-current="1" data-max="<?php echo (int) $right_max_pages; ?>" data-label="Xem thêm tin tức" data-loading="Đang tải...">Xem thêm tin tức</button>
       <p class="news-load-more-end" id="news-load-more-end" style="display:none;">Đã xem hết tin tức</p>
     </div>
     <?php endif; ?>
 
-    <!-- Pagination (giữ nguyên) -->
+    <!-- Pagination (chỉ cho cột phải) -->
     <?php
-    if ( $news_query->max_num_pages > 1 ) :
+    if ( $right_max_pages > 1 ) :
       $base = $news_page_url . ( strpos( $news_page_url, '?' ) !== false ? '&' : '?' ) . 'paged=%#%';
     ?>
-    <nav class="news-pagination" aria-label="Phân trang tin tức">
+    <nav id="news-pagination-nav" class="news-pagination" aria-label="Phân trang tin tức">
       <?php
       echo paginate_links([
         'base'      => $base,
         'format'    => '',
         'current'   => $paged,
-        'total'     => $news_query->max_num_pages,
+        'total'     => $right_max_pages,
         'prev_text' => '← Trước',
         'next_text' => 'Sau →',
         'type'      => 'plain',

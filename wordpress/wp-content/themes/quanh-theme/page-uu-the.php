@@ -10,7 +10,9 @@ get_header();
     
     <!-- Title -->
     <div class="section-header">
-      <p class="subtitle">RIVERA THIÊN HOA</p>
+      <div class="subtitle">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/headeruuthe.png" alt="Rivera Thiên Hoa">
+      </div>
       <h1 class="page-title">5 LỢI THẾ DANH GIÁ</h1>
     </div>
 
@@ -94,51 +96,7 @@ get_header();
 
     </div>
 
-    <!-- <div class="detailed-section">
-      
-      <div class="detail-column">
-        <div class="detail-card">
-          <div class="detail-icon">🎯</div>
-          <h3>Định Vị Đẳng Cấp</h3>
-          <p>Rivera Thiên Hoa không chỉ là nơi an cư mà còn là biểu tượng của sự thịnh vượng và đẳng cấp sống.</p>
-        </div>
-
-        <div class="detail-card">
-          <div class="detail-icon">🌟</div>
-          <h3>Không Gian Sống</h3>
-          <p>Mỗi căn nhà là một tác phẩm nghệ thuật, kết hợp hài hòa giữa công năng và thẩm mỹ.</p>
-        </div>
-      </div>
-
-      <div class="center-image">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/main-building.jpg" alt="Rivera Thiên Hoa">
-      </div>
-
-      <div class="detail-column">
-        <div class="detail-card">
-          <div class="detail-icon">📈</div>
-          <h3>Tăng Trưởng Bền Vững</h3>
-          <p>Giá trị tài sản tăng trưởng theo thời gian nhờ vị trí đắc địa và quy hoạch bài bản.</p>
-        </div>
-
-        <div class="detail-card">
-          <div class="detail-icon">🤝</div>
-          <h3>Cam Kết Chất Lượng</h3>
-          <p>Đội ngũ chuyên nghiệp và tâm huyết, đảm bảo từng chi tiết hoàn thiện tốt nhất.</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="cta-section">
-      <h2>Khám Phá <span class="highlight">Đẳng Cấp</span> Sống Mới</h2>
-      <p>Hãy để Rivera Thiên Hoa trở thành nơi khởi đầu cho những ước mơ và hoài bão của bạn</p>
-      <div class="cta-buttons">
-        <a href="tel:0123456789" class="btn-primary">📞 LIÊN HỆ NGAY</a>
-        <a href="#" class="btn-secondary">XEM BẢNG GIÁ</a>
-      </div>
-    </div> -->
-
+    
   </div>
 </section>
 
