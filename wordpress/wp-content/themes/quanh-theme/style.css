@@ -1,4 +1,4 @@
-/*
+﻿/*
 Theme Name: Rivera Thiên Hoa
 Author: Quanh
 Version: 1.0
@@ -1240,8 +1240,7 @@ position: relative;
 /* Tagline */
 .location-tagline {
   text-align: center;
-  margin-top: 500px;
-  margin-left: 400px;
+  margin-top: 470px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1249,7 +1248,6 @@ position: relative;
 
 .location-tagline img {
   max-width: 800px;
-  width: 100%;
   height: auto;
   display: block;
 }
