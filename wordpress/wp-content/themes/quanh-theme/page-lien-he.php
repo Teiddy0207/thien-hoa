@@ -5,7 +5,16 @@
 
 get_header(); 
 ?>
-
+<style>
+    /* Background trang liên hệ - ưu tiên cao */
+    body {
+      background: url('<?php echo get_template_directory_uri(); ?>/assets/Lienhebgnew.png') !important;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+</style>
 <style>
     /* Tổng thể section */
     .contact-rivera-section {
@@ -176,16 +185,86 @@ get_header();
         gap: 10px;
     }
 
+    /* Footer với disclaimer */
+    .rv-footer-with-wave {
+        position: relative;
+        margin-top: 40px;
+        padding: 20px 0 0;
+        min-height: 200px;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+    }
+    .rv-disclaimer {
+        position: absolute;
+        bottom: -17px;
+        left: 0;
+        z-index: 1;
+        font-family: 'Be Vietnam Pro', Arial, sans-serif;
+        font-weight: 300;
+        font-style: italic;
+        font-size: 11px;
+        color: rgba(255,255,255,0.85);
+        text-align: left;
+        line-height: 1.6;
+    }
+
     /* Responsive cho tablet */
     @media (max-width: 1024px) {
         .contact-rivera-section {
             padding: 130px 24px 50px;
         }
         .rv-container {
-            padding: 0 16px;
+            padding: 0 24px;
+        }
+        .rv-info-title {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .rv-row {
+            flex-direction: column;
+            align-items: center;
+            gap: 36px;
         }
         .rv-col-info {
-            padding-right: 0;
+            flex: 1 1 auto;
+            width: 100%;
+            max-width: 540px;
+            padding: 0;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .rv-col-info .rv-info-icon-wrapper {
+            justify-content: center;
+        }
+        .rv-col-form {
+            flex: 1 1 auto;
+            width: 100%;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+        .rv-footer-with-wave {
+            margin-top: 36px;
+            padding: 20px 0 16px;
+        }
+    }
+
+    /* Responsive cho iPad Pro / tablet ngang (1366x1024) */
+    @media (max-width: 1400px) {
+        .rv-container {
+            padding: 0 60px;
+        }
+        .rv-row {
+            gap: 32px;
+            justify-content: center;
+        }
+        .rv-col-info {
+            flex: 1 1 380px;
+            max-width: 480px;
+        }
+        .rv-col-form {
+            flex: 0 1 440px;
+            max-width: 480px;
         }
     }
 
@@ -214,6 +293,10 @@ get_header();
             flex-direction: column;
             gap: 0;
         }
+        .rv-footer-with-wave {
+            margin-top: 32px;
+            padding: 20px 0 16px;
+        }
     }
 
     @media (max-width: 480px) {
@@ -222,6 +305,13 @@ get_header();
         }
         .rv-container {
             padding: 0 12px;
+        }
+        .rv-footer-with-wave {
+            margin-top: 24px;
+            padding: 16px 0 12px;
+        }
+        .rv-disclaimer {
+            font-size: 10px;
         }
     }
 </style>
@@ -310,8 +400,8 @@ get_header();
 
         </div>
         
-        <div style="margin-top: 40px; font-family: 'Be Vietnam Pro', Arial, sans-serif; font-weight: 300; font-style: italic; font-size: 11px; color: #5a6b7c; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-            * Thông tin, hình ảnh, các tiện ích trên website chỉ mang tính chất tương đối và có thể được điều chỉnh theo quyết định của Chủ đầu tư tại từng thời điểm.
+        <div class="rv-footer-with-wave">
+            <div class="rv-disclaimer">* Thông tin, hình ảnh, các tiện ích trên website chỉ mang tính chất tương đối và có thể được điều chỉnh theo quyết định của Chủ đầu tư tại từng thời điểm, đảm bảo phù hợp quy hoạch và thực tế thi công Dự án.</div>
         </div>
     </div>
 </section>
