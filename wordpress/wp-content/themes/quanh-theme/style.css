@@ -1,4 +1,4 @@
-﻿/*
+/*
 Theme Name: Rivera Thiên Hoa
 Author: Quanh
 Version: 1.0
@@ -608,29 +608,9 @@ body > section {
         font-size: 15px;
     }
 
-    /* Ảnh tòa nhà: hiện trên mobile, xếp dưới nội dung */
+    /* Ảnh tòa nhà: ẩn trên điện thoại */
     .hero-section .hero-image {
-        position: relative;
-        width: 100%;
-        max-width: 500px;
-        height: auto;
-        min-height: auto;
-        margin-top: 24px;
-        order: 2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .hero-section .hero-image img {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        max-height: 50vh;
-        max-height: 50dvh;
-        object-fit: contain;
-        object-position: center bottom;
-        display: block;
+        display: none !important;
     }
 
     .hero-bottom-image {
@@ -672,17 +652,6 @@ body > section {
         font-size: 14px;
     }
 
-    .hero-section .hero-image {
-        max-width: 100%;
-        margin-top: 16px;
-        display: none;
-    }
-
-    .hero-section .hero-image img {
-        max-height: 42vh;
-        max-height: 42dvh;
-    }
-
     .hero-bottom-image {
         display: none;
     }
@@ -710,11 +679,6 @@ body > section {
 
     .cta-text {
         font-size: 13px;
-    }
-
-    .hero-section .hero-image img {
-        max-height: 38vh;
-        max-height: 38dvh;
     }
 }
 
