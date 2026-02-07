@@ -11,7 +11,9 @@ get_header();
     <!-- Title -->
     <div class="section-header">
       <div class="subtitle">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/headeruuthe.png" alt="Rivera Thiên Hoa">
+        <!-- <img src="<?php echo get_template_directory_uri(); ?>/assets/headeruuthe.png" alt="Rivera Thiên Hoa"> -->
+                 <img src="<?php echo get_template_directory_uri(); ?>/assets/logouuthe6.png" alt="Rivera Thiên Hoa">
+
       </div>
       <h1 class="page-title">5 LỢI THẾ DANH GIÁ</h1>
     </div>

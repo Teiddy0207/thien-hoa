@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,10 +45,11 @@
   
   <!-- <a href="tel:0123456789" class="contact-btn phone" title="Gọi ngay">📞</a> -->
   <a href="#lien-he" class="contact-call">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/call.png" alt="Gọi ngay">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/call4.png" alt="" class="contact-call-bg">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/call5.png" alt="Gọi ngay" class="contact-call-icon">
   </a>
   <a href="#lien-he" class="contact-column" title="Liên hệ để đặt mua">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/column.png" alt="Liên hệ">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/column4.png" alt="Liên hệ">
     <span class="column-text">LIÊN HỆ ĐỂ ĐẶT MUA</span>
   </a>
 
