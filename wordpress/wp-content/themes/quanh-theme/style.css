@@ -1,4 +1,4 @@
-﻿/*
+/*
 Theme Name: Rivera Thiên Hoa
 Author: Quanh
 Version: 1.0
@@ -610,11 +610,97 @@ body > section {
 
     /* Ảnh tòa nhà: ẩn trên điện thoại */
     .hero-section .hero-image {
-        display: none !important;
+        display: none;
     }
 
     .hero-bottom-image {
         display: none;
+    }
+
+    /* ===== TRANG CHỦ MOBILE: tỉ lệ 16/9 + giao diện đẹp hơn (chỉ áp dụng cho trang chủ) ===== */
+    body.home .hero-section,
+    body.front-page .hero-section,
+    body.page-template-front-page .hero-section {
+        margin-top: 0;
+        min-height: 0;
+        padding: 0;
+        aspect-ratio: 16 / 9;
+        width: 100%;
+        max-height: calc(100vh - 70px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    body.home .hero-section::before,
+    body.front-page .hero-section::before,
+    body.page-template-front-page .hero-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0, 30, 50, 0.25) 0%, rgba(0, 30, 50, 0.5) 100%);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    body.home .hero-section .hero-container,
+    body.front-page .hero-section .hero-container,
+    body.page-template-front-page .hero-section .hero-container {
+        position: relative;
+        z-index: 2;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-left)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right));
+        gap: clamp(16px, 4vw, 28px);
+    }
+
+    body.home .hero-section .hero-content,
+    body.front-page .hero-section .hero-content,
+    body.page-template-front-page .hero-section .hero-content {
+        width: 100%;
+        max-width: 90%;
+    }
+
+    body.home .hero-section .hero-title-image,
+    body.front-page .hero-section .hero-title-image,
+    body.page-template-front-page .hero-section .hero-title-image {
+        max-width: 85%;
+        width: auto;
+        height: auto;
+        margin-bottom: 0;
+        filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.35));
+    }
+
+    body.home .hero-section .cta-btn-custom,
+    body.front-page .hero-section .cta-btn-custom,
+    body.page-template-front-page .hero-section .cta-btn-custom {
+        margin-top: clamp(8px, 2vw, 16px);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    body.home .hero-section .cta-btn-custom:active,
+    body.front-page .hero-section .cta-btn-custom:active,
+    body.page-template-front-page .hero-section .cta-btn-custom:active {
+        transform: scale(0.97);
+    }
+
+    body.home .hero-section .cta-btn-custom img,
+    body.front-page .hero-section .cta-btn-custom img,
+    body.page-template-front-page .hero-section .cta-btn-custom img {
+        height: clamp(44px, 12vw, 52px);
+        width: auto;
+    }
+
+    body.home .hero-section .cta-text,
+    body.front-page .hero-section .cta-text,
+    body.page-template-front-page .hero-section .cta-text {
+        font-size: clamp(14px, 3.8vw, 16px);
     }
 }
 
@@ -654,6 +740,22 @@ body > section {
 
     .hero-bottom-image {
         display: none;
+    }
+
+    /* Trang chủ: giữ 16/9 và safe-area trên màn nhỏ */
+    body.home .hero-section,
+    body.front-page .hero-section,
+    body.page-template-front-page .hero-section {
+        padding: 0;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+        max-height: calc(100vh - 65px);
+    }
+
+    body.home .hero-section .hero-title-image,
+    body.front-page .hero-section .hero-title-image,
+    body.page-template-front-page .hero-section .hero-title-image {
+        max-width: 88%;
     }
 }
 
@@ -711,6 +813,21 @@ body > section {
     .cta-btn-custom img {
         height: 44px;
     }
+
+    /* Trang chủ: giữ 16/9, container dùng safe-area */
+    body.home .hero-section,
+    body.front-page .hero-section,
+    body.page-template-front-page .hero-section {
+        padding: 0;
+        aspect-ratio: 16 / 9;
+        max-height: calc(100dvh - 70px);
+    }
+
+    body.home .hero-section .hero-container,
+    body.front-page .hero-section .hero-container,
+    body.page-template-front-page .hero-section .hero-container {
+        padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
+    }
 }
 
 @media (max-width: 390px) {
@@ -724,6 +841,14 @@ body > section {
 
     .cta-text {
         font-size: 13px;
+    }
+
+    /* Trang chủ: giữ 16/9 */
+    body.home .hero-section,
+    body.front-page .hero-section,
+    body.page-template-front-page .hero-section {
+        padding: 0;
+        aspect-ratio: 16 / 9;
     }
 }
 
