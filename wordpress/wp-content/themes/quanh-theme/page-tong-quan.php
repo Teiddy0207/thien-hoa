@@ -41,7 +41,7 @@ get_header();
 
       <!-- Quy mô -->
       <div class="info-group">
-        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan4.png" alt=""></div>
+        <div class="info-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan45.png" alt=""></div>
         <div class="info-details">
           <div class="info-label">Quy mô:</div>
           <div class="info-value">2.94 ha</div>
