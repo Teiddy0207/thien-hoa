@@ -1339,7 +1339,7 @@ position: relative;
   position: absolute;
   left: 0;
   top: 0;
-  width: 50vw; /* 50% viewport width */
+  width: 55vw; /* 50% viewport width */
   /* height: 100%; */
   height: 100vh;
   margin-left: calc(-50vw + 50%); /* Đẩy ra ngoài bên trái */
