@@ -7,11 +7,6 @@ if ( ! defined( 'QUANH_THEME_VERSION' ) ) {
 add_theme_support('menus');
 add_theme_support('title-tag');
 
-function quanh_add_viewport_meta() {
-  echo '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">' . "\n";
-}
-add_action( 'wp_head', 'quanh_add_viewport_meta', 9999 );
-
 register_nav_menus([
   'header' => 'Header Menu'
 ]);
