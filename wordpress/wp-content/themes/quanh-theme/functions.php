@@ -39,22 +39,30 @@ function quanh_fallback_menu() {
 }
 
 function quanh_enqueue_styles() {
+  $style_file = get_stylesheet_directory() . '/style.css';
+  $version    = file_exists( $style_file ) ? (string) filemtime( $style_file ) : '1.0';
   wp_enqueue_style(
     'quanh-style',
     get_stylesheet_uri(),
     [],
-    '1.0'
+    $version
   );
 }
 add_action('wp_enqueue_scripts', 'quanh_enqueue_styles');
 
 function quanh_enqueue_scripts() {
+  $js_dir = get_template_directory() . '/assets/js/';
+  $ver_js = function( $file ) use ( $js_dir ) {
+    $path = $js_dir . $file;
+    return file_exists( $path ) ? (string) filemtime( $path ) : '1.0';
+  };
+
   /* Hamburger menu: load trong head để vẫn chạy khi trang không gọi get_footer() */
   wp_enqueue_script(
     'quanh-hamburger-menu',
     get_template_directory_uri() . '/assets/js/hamburger-menu.js',
     array(),
-    '1.0',
+    $ver_js( 'hamburger-menu.js' ),
     false
   );
 
@@ -62,7 +70,7 @@ function quanh_enqueue_scripts() {
     'news-load-more',
     get_template_directory_uri() . '/assets/js/news-load-more.js',
     array(),
-    '1.0',
+    $ver_js( 'news-load-more.js' ),
     true
   );
   wp_localize_script('news-load-more', 'newsLoadMore', array(
@@ -74,7 +82,7 @@ function quanh_enqueue_scripts() {
     'news-pagination-ajax',
     get_template_directory_uri() . '/assets/js/news-pagination-ajax.js',
     array(),
-    '1.0',
+    $ver_js( 'news-pagination-ajax.js' ),
     true
   );
   $news_page_url = home_url('/');

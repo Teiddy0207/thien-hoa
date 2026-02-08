@@ -14,7 +14,7 @@
   <div class="header-container">
 
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo" title="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
-      <img src="<?php echo get_template_directory_uri(); ?>/assets/thienHoa.png" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+      <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/thienHoa.png' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
     </a>
 
     <!-- Hamburger Button -->
@@ -45,11 +45,11 @@
   
   <!-- <a href="tel:0123456789" class="contact-btn phone" title="Gọi ngay">📞</a> -->
   <a href="#lien-he" class="contact-call">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/call4.png" alt="" class="contact-call-bg">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/call5.png" alt="Gọi ngay" class="contact-call-icon">
+    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/call4.png' ); ?>" alt="" class="contact-call-bg">
+    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/call5.png' ); ?>" alt="Gọi ngay" class="contact-call-icon">
   </a>
   <a href="#lien-he" class="contact-column" title="Liên hệ để đặt mua">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/column4.png" alt="Liên hệ">
+    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/column4.png' ); ?>" alt="Liên hệ">
     <span class="column-text">LIÊN HỆ ĐỂ ĐẶT MUA</span>
   </a>
 

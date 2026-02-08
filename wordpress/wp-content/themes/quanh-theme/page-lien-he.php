@@ -8,7 +8,7 @@ get_header();
 <style>
     /* Background trang liên hệ - ưu tiên cao */
     body {
-      background: url('<?php echo get_template_directory_uri(); ?>/assets/Lienhebgnew.png') !important;
+      background: url('<?php echo esc_url( get_template_directory_uri() . '/assets/Lienhebgnew.png' ); ?>') !important;
       background-attachment: fixed;
       background-size: cover;
       background-position: center center;

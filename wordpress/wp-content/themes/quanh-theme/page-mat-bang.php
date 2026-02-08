@@ -18,7 +18,7 @@ get_header();
           if (has_post_thumbnail()) {
             the_post_thumbnail('full');
           } else {
-            echo '<img src="' . get_template_directory_uri() . '/assets/house3.png" alt="Rivera Thiên Hoa Shophouse">';
+            echo '<img src="' . esc_url( get_template_directory_uri() . '/assets/house3.png' ) . '" alt="Rivera Thiên Hoa Shophouse">';
           }
           ?>
           <div class="matbang-image-overlay"></div>

@@ -59,8 +59,12 @@ get_header();
       </div>
 
       <!-- Back to News -->
+      <?php
+      $news_page = get_page_by_path( 'tin-tuc' );
+      $news_url  = $news_page ? get_permalink( $news_page ) : home_url( '/tin-tuc/' );
+      ?>
       <div class="back-to-news">
-        <a href="<?php echo get_permalink(get_page_by_path('tin-tuc')); ?>" class="back-link">
+        <a href="<?php echo esc_url( $news_url ); ?>" class="back-link">
           <span>←</span> Quay lại Tin tức
         </a>
       </div>
@@ -100,7 +104,7 @@ get_header();
               }
             }
           ?>
-          <a href="<?php the_permalink(); ?>" class="other-news-card">
+          <a href="<?php echo esc_url( get_permalink() ); ?>" class="other-news-card">
             <div class="other-news-thumb"><?php echo $thumb; ?></div>
             <div class="other-news-info">
               <span class="other-news-date"><?php echo get_the_date( 'd/m/Y' ); ?></span>
