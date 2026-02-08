@@ -13,9 +13,9 @@
 <header class="site-header">
   <div class="header-container">
 
-    <div class="logo">
-      <img src="<?php echo get_template_directory_uri(); ?>/assets/thienHoa.png" alt="Logo">
-    </div>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo" title="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+      <img src="<?php echo get_template_directory_uri(); ?>/assets/thienHoa.png" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+    </a>
 
     <!-- Hamburger Button -->
     <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle Menu">

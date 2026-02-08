@@ -1,4 +1,4 @@
-/*
+﻿/*
 Theme Name: Rivera Thiên Hoa
 Author: Quanh
 Version: 1.0
@@ -4787,79 +4787,7 @@ background: linear-gradient(
 }
 
 /* Single Post – màn rất nhỏ (iPhone SE, notch nhỏ) */
-@media (max-width: 390px) {
-  .single-post-section {
-    padding-top: max(90px, calc(65px + env(safe-area-inset-top)));
-    padding-left: max(12px, env(safe-area-inset-left));
-    padding-right: max(12px, env(safe-area-inset-right));
-  }
 
-  .post-title {
-    font-size: 22px;
-  }
-
-  .post-content {
-    padding: 18px 14px;
-    font-size: 14px;
-  }
-
-  .post-content h2 {
-    font-size: 20px;
-  }
-
-  .post-content h3 {
-    font-size: 17px;
-  }
-
-  .post-content h4 {
-    font-size: 16px;
-  }
-
-  .other-news-section {
-    margin-top: 28px;
-    padding-top: 24px;
-  }
-
-  .other-news-title {
-    font-size: 16px;
-    margin-bottom: 16px;
-  }
-
-  /* Trang Tổng quan – màn rất nhỏ */
-  .overview-section .page-title {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-
-  .overview-section {
-    padding-top: max(90px, calc(65px + env(safe-area-inset-top)));
-    padding-left: max(12px, env(safe-area-inset-left));
-    padding-right: max(12px, env(safe-area-inset-right));
-  }
-
-  .overview-content {
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-
-  .info-group {
-    padding: 14px 16px;
-    gap: 12px;
-  }
-
-  .info-icon img {
-    width: 32px;
-    height: 32px;
-  }
-
-  .info-label {
-    font-size: 13px;
-  }
-
-  .info-value {
-    font-size: 12px;
-  }
-}
 
 /* === LIBRARY PAGE === */
 .library-section {
