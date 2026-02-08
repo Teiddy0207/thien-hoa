@@ -68,6 +68,41 @@ function quanh_fallback_menu() {
   echo '</ul>';
 }
 
+
+function quanh_fix_home_menu_current_class( $classes, $item ) {
+  if ( ! is_front_page() ) {
+    $front_page_id = (int) get_option( 'page_on_front' );
+    
+    $is_front_page_item = false;
+    
+    if ( $item->type === 'post_type' && (int) $item->object_id === $front_page_id && $front_page_id > 0 ) {
+      $is_front_page_item = true;
+    }
+    
+    if ( $item->type === 'custom' ) {
+      $home_url = trailingslashit( home_url() );
+      $item_url = trailingslashit( $item->url );
+      if ( $item_url === $home_url || $item->url === home_url() ) {
+        $is_front_page_item = true;
+      }
+    }
+    
+    if ( $is_front_page_item ) {
+      $classes = array_diff( $classes, array(
+        'current-menu-item',
+        'current_page_item',
+        'current-menu-ancestor',
+        'current-menu-parent',
+        'current_page_parent',
+        'current_page_ancestor'
+      ) );
+    }
+  }
+  
+  return $classes;
+}
+add_filter( 'nav_menu_css_class', 'quanh_fix_home_menu_current_class', 10, 2 );
+
 function quanh_enqueue_styles() {
   $style_file = function_exists( 'get_theme_file_path' ) ? get_theme_file_path( 'style.css' ) : ( get_stylesheet_directory() . '/style.css' );
   $mtime      = ( $style_file && file_exists( $style_file ) ) ? filemtime( $style_file ) : false;
