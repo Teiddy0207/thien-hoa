@@ -1,10 +1,40 @@
 <?php
+
+if ( ! defined( 'QUANH_THEME_VERSION' ) ) {
+  define( 'QUANH_THEME_VERSION', '1.0.0' );
+}
+
 add_theme_support('menus');
 add_theme_support('title-tag');
+
+function quanh_add_viewport_meta() {
+  echo '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">' . "\n";
+}
+add_action( 'wp_head', 'quanh_add_viewport_meta', 9999 );
 
 register_nav_menus([
   'header' => 'Header Menu'
 ]);
+
+function quanh_body_class_template_pages( $classes ) {
+  $slug_to_template_class = [
+    'lien-he'   => 'page-template-page-lien-he-php',
+    'tong-quan' => 'page-template-page-tong-quan-php',
+    'vi-tri'    => 'page-template-page-vi-tri-php',
+    'mat-bang'  => 'page-template-page-mat-bang-php',
+    'uu-the'    => 'page-template-page-uu-the-php',
+    'thu-vien'  => 'page-template-page-thu-vien-php',
+    'tin-tuc'   => 'page-template-page-tin-tuc-php',
+  ];
+  foreach ( $slug_to_template_class as $slug => $template_class ) {
+    if ( is_page( $slug ) && ! in_array( $template_class, $classes, true ) ) {
+      $classes[] = $template_class;
+      break;
+    }
+  }
+  return $classes;
+}
+add_filter( 'body_class', 'quanh_body_class_template_pages', 20 );
 
 // Fallback menu tự động nếu menu chưa được cấu hình
 function quanh_fallback_menu() {
@@ -39,8 +69,9 @@ function quanh_fallback_menu() {
 }
 
 function quanh_enqueue_styles() {
-  $style_file = get_stylesheet_directory() . '/style.css';
-  $version    = file_exists( $style_file ) ? (string) filemtime( $style_file ) : '1.0';
+  $style_file = function_exists( 'get_theme_file_path' ) ? get_theme_file_path( 'style.css' ) : ( get_stylesheet_directory() . '/style.css' );
+  $mtime      = ( $style_file && file_exists( $style_file ) ) ? filemtime( $style_file ) : false;
+  $version    = $mtime ? (string) $mtime : ( defined( 'QUANH_THEME_VERSION' ) ? QUANH_THEME_VERSION : '1.0' );
   wp_enqueue_style(
     'quanh-style',
     get_stylesheet_uri(),
