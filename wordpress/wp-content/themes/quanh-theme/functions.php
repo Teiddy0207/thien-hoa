@@ -444,12 +444,11 @@ function quanh_single_add_alt_as_caption( $content ) {
 
   // 1b) Nếu người soạn nhập "mô tả ảnh" như 1 đoạn <p> ngay sau figure (thay vì caption),
   // thì chuyển nó thành figcaption để frontend hiển thị đúng kiểu mô tả (italic).
+  // Nếu caption đã có (do caption thật hoặc do fallback từ ALT), thì chỉ xoá <p> khi nội dung bị trùng.
   foreach ( $figures as $figure ) {
     // Nếu đã có figcaption và có nội dung thì bỏ qua
     $existing = $xpath->query( './figcaption', $figure )->item( 0 );
-    if ( $existing && trim( $existing->textContent ) !== '' ) {
-      continue;
-    }
+    $existing_text = $existing ? trim( $existing->textContent ) : '';
 
     $next = $figure->nextSibling;
     while ( $next && $next->nodeType === XML_TEXT_NODE && trim( $next->textContent ) === '' ) {
@@ -466,6 +465,18 @@ function quanh_single_add_alt_as_caption( $content ) {
     }
     $text = trim( $next->textContent );
     if ( $text === '' || mb_strlen( $text ) > 180 ) {
+      continue;
+    }
+
+    // Nếu caption đã có, chỉ xoá <p> khi trùng caption hoặc trùng ALT.
+    if ( $existing_text !== '' ) {
+      $img = $xpath->query( './/img[1]', $figure )->item( 0 );
+      $alt = $img ? trim( (string) $img->getAttribute( 'alt' ) ) : '';
+      $same_as_caption = mb_strtolower( $text ) === mb_strtolower( $existing_text );
+      $same_as_alt = $alt !== '' && mb_strtolower( $text ) === mb_strtolower( $alt );
+      if ( $same_as_caption || $same_as_alt ) {
+        $next->parentNode->removeChild( $next );
+      }
       continue;
     }
 

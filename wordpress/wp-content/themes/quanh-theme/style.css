@@ -223,11 +223,11 @@ body > section {
   top: 0;
   left: 0;
   right: 0;
-  padding: 20px 0;
+  padding: 10px 0;
   z-index: 1000;
-  background: rgba(0, 30, 50, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* background: rgba(0, 30, 50, 0.5); */
+  /* backdrop-filter: blur(12px); */
+  /* -webkit-backdrop-filter: blur(12px); */
 }
 
 .header-container {
@@ -387,6 +387,8 @@ body.page-template-front-page .hero-section {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    position: relative;
+    top: -80px;
     animation: fadeInLeft 1s ease forwards;
     z-index: 20;
 }
