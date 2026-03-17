@@ -223,10 +223,10 @@ body > section {
   top: 0;
   left: 0;
   right: 0;
-  padding: 20px 0;
+  /* padding: 20px 0; */
   z-index: 1000;
-  background: rgba(0, 30, 50, 0.5);
-  backdrop-filter: blur(12px);
+  /* background: rgba(0, 30, 50, 0.5); */
+  /* backdrop-filter: blur(12px); */
   -webkit-backdrop-filter: blur(12px);
 }
 
@@ -338,6 +338,14 @@ body > section {
     /* Đã bỏ background gradient/dot/wave ở đây vì bạn dùng ảnh nền riêng */
 }
 
+/* Trang chủ: giữ header như cũ, nhưng không tạo scroll dư */
+body.home .hero-section,
+body.front-page .hero-section,
+body.page-template-front-page .hero-section {
+  min-height: calc(100vh - 70px);
+  overflow: hidden;
+}
+
 /* === LỚP DƯỚI: ẢNH TÒA NHÀ (OBJECT) === */
 .hero-image-object {
     position: absolute; /* Tách khỏi dòng chảy văn bản để tự do di chuyển */
@@ -397,6 +405,14 @@ body > section {
     justify-content: flex-end;
     z-index: 1;
     pointer-events: none;
+}
+
+/* Trang chủ: ảnh hero bám theo chiều cao section */
+body.home .hero-section .hero-image,
+body.front-page .hero-section .hero-image,
+body.page-template-front-page .hero-section .hero-image {
+  height: 100%;
+  min-height: 100%;
 }
 
 .hero-section .hero-image img {
@@ -538,6 +554,13 @@ body > section {
         justify-content: flex-end;
         z-index: 1;
         pointer-events: none;
+    }
+
+    body.home .hero-section .hero-image,
+    body.front-page .hero-section .hero-image,
+    body.page-template-front-page .hero-section .hero-image {
+      height: 100%;
+      min-height: 100%;
     }
 
     .hero-section .hero-image img {
@@ -1041,19 +1064,18 @@ body > section {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 20px;
+  gap: 12px;
 }
 
-
 .contact-column {
-position: relative; 
-  width: 60px;
-  height: 220px;
+  position: relative;
+  width: 48px;
+  height: 176px;
   display: block;
 }
 
 .contact-column img {
- width: 100%;
+  width: 100%;
   height: 100%;
   display: block;
 }
@@ -1067,8 +1089,8 @@ position: relative;
   transform: translate(-50%, -50%) rotate(180deg);
   writing-mode: vertical-rl;
   color: #003366;
-  font-size: 14px;
-  letter-spacing: 2px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
   text-align: center;
   white-space: nowrap;
   pointer-events: none;
@@ -1081,8 +1103,8 @@ position: relative;
 }
 .contact-call {
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   display: block;
 }
 
@@ -1462,7 +1484,7 @@ position: relative;
 /* Hero Section */
 /* MATBANG PAGE */
 .matbang-section {
-   padding: 150px 0 0 0;
+  padding: 150px 0 0 0;
   /* min-height: 100vh; */
   overflow: hidden;
 }
@@ -1957,21 +1979,21 @@ position: relative;
   }
 
   .contact-buttons {
-    gap: 15px;
+    gap: 10px;
   }
 
   .contact-column {
-    width: 50px;
-    height: 180px;
+    width: 42px;
+    height: 154px;
   }
 
   .contact-call {
-    width: 50px;
-    height: 50px;
+    width: 42px;
+    height: 42px;
   }
 
   .column-text {
-    font-size: 12px;
+    font-size: 10px;
   }
 }
 
@@ -2098,21 +2120,21 @@ position: relative;
   }
 
   .contact-buttons {
-    gap: 12px;
+    gap: 8px;
   }
 
   .contact-column {
-    width: 45px;
-    height: 160px;
+    width: 38px;
+    height: 132px;
   }
 
   .contact-call {
-    width: 45px;
-    height: 45px;
+    width: 38px;
+    height: 38px;
   }
 
   .column-text {
-    font-size: 11px;
+    font-size: 9px;
     letter-spacing: 1px;
   }
 }
@@ -2228,21 +2250,21 @@ position: relative;
     top: auto;
     transform: none;
     flex-direction: row;
-    gap: 10px;
+    gap: 8px;
     z-index: 2000;
   }
 
   .contact-column {
-    width: 40px;
-    height: 120px;
+    width: 36px;
+    height: 100px;
     display: none;
   }
 
   .contact-call {
-    width: 50px;
-    height: 50px;
-    min-width: 48px;
-    min-height: 48px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   /* Hero Section - Đã được xử lý ở phần responsive riêng phía trên */
@@ -2680,14 +2702,14 @@ position: relative;
   .contact-buttons {
     bottom: max(12px, env(safe-area-inset-bottom));
     right: max(12px, env(safe-area-inset-right));
-    gap: 8px;
+    gap: 6px;
   }
 
   .contact-call {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
-    min-height: 48px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
   }
 
   /* Hero Section - Đã được xử lý ở phần responsive riêng phía trên */
@@ -3365,6 +3387,20 @@ background: linear-gradient(
 .news-section {
   padding: 9.375rem 2.5rem 5rem;
   min-height: 100vh;
+}
+
+/* Trang single (bài viết): ẩn header và nút liên hệ, chỉ hiện nội dung bài */
+body.single .site-header,
+body.single-post .site-header {
+  display: none !important;
+}
+body.single .contact-buttons,
+body.single-post .contact-buttons {
+  display: none !important;
+}
+body.single .single-post-section,
+body.single-post .single-post-section {
+  padding-top: 2.5rem;
 }
 
 /* Trang tin tức: bỏ bo góc */
@@ -4316,6 +4352,27 @@ background: linear-gradient(
   margin: 30px 0;
 }
 
+/* Mô tả ảnh (caption dưới block Ảnh): chữ nghiêng, phân biệt với nội dung */
+.single-post-section .post-content figcaption,
+.single-post-section .post-content .wp-caption-text,
+.single-post-section .post-content .wp-element-caption {
+  display: block;
+  font-style: italic;
+  font-size: 0.95em;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 8px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.single-post-section .post-content figure {
+  margin-bottom: 24px;
+}
+.single-post-section .post-content figure figcaption,
+.single-post-section .post-content figure .wp-caption-text,
+.single-post-section .post-content figure .wp-element-caption {
+  margin-bottom: 0;
+}
+
 .post-content ul,
 .post-content ol {
   margin-left: 30px;
@@ -4856,6 +4913,24 @@ background: linear-gradient(90deg, #ff0000, #ff6a00);
   margin-bottom: 60px;
 }
 
+/* Mỗi lần hiển thị 2 ảnh, nút Trước/Sau chuyển trang */
+.gallery-pages-wrap {
+  position: relative;
+  min-height: 280px;
+}
+.library-gallery .gallery-page {
+  display: none;
+}
+.library-gallery .gallery-page.active {
+  display: block;
+}
+.library-gallery .gallery-page .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -4865,6 +4940,18 @@ background: linear-gradient(90deg, #ff0000, #ff6a00);
 
 .gallery-item {
   position: relative;
+}
+
+.gallery-page-info {
+  margin: 0 16px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  min-width: 4em;
+  text-align: center;
+}
+.gallery-nav .nav-arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .gallery-image-wrapper {
@@ -4923,18 +5010,25 @@ background: linear-gradient(90deg, #ff0000, #ff6a00);
   color: #ffffff;
   text-decoration: none;
   font-size: 18px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+.gallery-nav a.nav-arrow {
+  padding: 8px 12px;
 }
 
-.nav-arrow:hover {
+.nav-arrow:hover:not(:disabled) {
   color: #d4af37;
   transform: translateX(5px);
 }
 
-.nav-arrow.prev:hover {
+.nav-arrow.prev:hover:not(:disabled) {
   transform: translateX(-5px);
 }
 
@@ -4947,6 +5041,24 @@ background: linear-gradient(90deg, #ff0000, #ff6a00);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 40px;
+}
+
+.video-item {
+  position: relative;
+}
+.video-item .video-item-title {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+.video-item iframe {
+  max-width: 100%;
+  border-radius: 8px;
+  aspect-ratio: 16/9;
+  width: 100%;
+  height: auto;
+  min-height: 200px;
 }
 
 /* Responsive */
@@ -5097,6 +5209,29 @@ body.page-lien-he {
   }
 }
 
+/* Background riêng cho trang mặt bằng */
+body.page-template-page-mat-bang-php,
+body.page-template-page-mat-bang,
+body.page-mat-bang {
+  background: url('assets/matbang22.png') !important;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Responsive background cho trang mặt bằng */
+@media (max-width: 768px) {
+  body.page-template-page-mat-bang-php,
+  body.page-template-page-mat-bang,
+  body.page-mat-bang {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+
 /* Trang Tổng quan: ảnh nền tràn xuống cả footer */
 body.page-template-page-tong-quan-php,
 body.page-tong-quan {
@@ -5123,3 +5258,419 @@ body.page-tong-quan .site-footer {
     background-repeat: no-repeat;
   }
 }
+
+/* ========== Section Liên hệ (dùng chung trang Liên hệ + Landing) ========== */
+.contact-rivera-section {
+  color: #fff;
+  padding: 150px 40px 60px;
+  margin-top: 70px;
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+.contact-rivera-section .rv-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 170px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.contact-rivera-section .rv-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+.contact-rivera-section .rv-col-info {
+  flex: 1 1 420px;
+  min-width: 0;
+  padding: 32px 24px 32px 0;
+  margin-bottom: 0;
+}
+.contact-rivera-section .rv-info-title {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+.contact-rivera-section .rv-info-item {
+  margin-bottom: 25px;
+}
+.contact-rivera-section .rv-info-label {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #ffffff;
+}
+.contact-rivera-section .rv-info-text {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #ffffff;
+}
+.contact-rivera-section .rv-col-form {
+  flex: 0 0 540px;
+  min-width: 0;
+  max-width: 100%;
+  background: rgba(0, 30, 60, 0.6);
+  padding: 48px 44px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.contact-rivera-section .rv-form-title {
+  text-align: center;
+  font-size: 28px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #fff;
+}
+.contact-rivera-section .rv-form-subtitle {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 30px;
+  color: #ccc;
+  font-weight: 300;
+}
+.contact-rivera-section .rv-input-group {
+  margin-bottom: 20px;
+}
+.contact-rivera-section .rv-input {
+  width: 100%;
+  padding: 12px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #5a6b7c;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.contact-rivera-section .rv-input:focus {
+  border-bottom-color: #d4af37;
+}
+.contact-rivera-section .rv-input::placeholder {
+  color: #7a8b9c;
+}
+.contact-rivera-section .rv-form-row-dual {
+  display: flex;
+  gap: 20px;
+}
+.contact-rivera-section .rv-form-row-dual .rv-input-group {
+  flex: 1;
+}
+.contact-rivera-section .rv-submit-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 30px;
+  background: transparent;
+  border: 1px solid #d4af37;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+  font-size: 16px;
+}
+.contact-rivera-section .rv-submit-btn:hover {
+  background: #d4af37;
+  color: #000;
+}
+.contact-rivera-section .rv-note {
+  margin-top: 20px;
+  font-size: 12px;
+  font-style: italic;
+  color: #7a8b9c;
+  text-align: center;
+}
+.contact-rivera-section .rv-info-icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.contact-rivera-section .rv-footer-with-wave {
+  position: relative;
+  margin-top: 40px;
+  padding: 20px 0 0;
+  min-height: 200px;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+.contact-rivera-section .rv-disclaimer {
+  position: absolute;
+  bottom: -17px;
+  left: 0;
+  z-index: 1;
+  font-family: 'Be Vietnam Pro', Arial, sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 11px;
+  color: rgba(255,255,255,0.85);
+  text-align: left;
+  line-height: 1.6;
+}
+@media (max-width: 1400px) {
+  .contact-rivera-section .rv-container {
+    padding: 0 60px;
+  }
+  .contact-rivera-section .rv-row {
+    gap: 32px;
+    justify-content: center;
+  }
+  .contact-rivera-section .rv-col-info {
+    flex: 1 1 380px;
+    max-width: 480px;
+  }
+  .contact-rivera-section .rv-col-form {
+    flex: 0 1 440px;
+    max-width: 480px;
+  }
+}
+@media (max-width: 1024px) {
+  .contact-rivera-section {
+    padding: 130px 24px 50px;
+  }
+  .contact-rivera-section .rv-container {
+    padding: 0 24px;
+  }
+  .contact-rivera-section .rv-info-title {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .contact-rivera-section .rv-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+  }
+  .contact-rivera-section .rv-col-info {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 540px;
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-rivera-section .rv-col-info .rv-info-icon-wrapper {
+    justify-content: center;
+  }
+  .contact-rivera-section .rv-col-form {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .contact-rivera-section .rv-footer-with-wave {
+    margin-top: 36px;
+    padding: 20px 0 16px;
+  }
+}
+@media (max-width: 768px) {
+  .contact-rivera-section {
+    padding: 120px 20px 40px;
+    margin-top: 70px;
+  }
+  .contact-rivera-section .rv-container {
+    padding: 0 16px;
+  }
+  .contact-rivera-section .rv-row {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .contact-rivera-section .rv-col-info {
+    margin-bottom: 24px;
+  }
+  .contact-rivera-section .rv-col-form {
+    flex: 1 1 auto;
+    width: 100%;
+    padding: 24px 20px;
+  }
+  .contact-rivera-section .rv-form-row-dual {
+    flex-direction: column;
+    gap: 0;
+  }
+  .contact-rivera-section .rv-footer-with-wave {
+    margin-top: 32px;
+    padding: 20px 0 16px;
+  }
+}
+@media (max-width: 480px) {
+  .contact-rivera-section {
+    padding: 100px 16px 30px;
+  }
+  .contact-rivera-section .rv-container {
+    padding: 0 12px;
+  }
+  .contact-rivera-section .rv-footer-with-wave {
+    margin-top: 24px;
+    padding: 16px 0 12px;
+  }
+  .contact-rivera-section .rv-disclaimer {
+    font-size: 10px;
+  }
+}
+
+/* ========== Landing page: cuộn mượt + hiệu ứng từng section ========== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Cuộn 1 trang = dừng tại section (chỉ khi có .landing-page) */
+html:has(body.home) {
+  scroll-snap-type: none;
+}
+.landing-page > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+/* Hiệu ứng: mỗi section mờ + lệch dưới lúc đầu, khi vào viewport thì hiện mượt */
+.landing-page > section.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+}
+.landing-page > section.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Hero luôn hiện ngay, không chờ observer */
+.landing-page > section.hero-section.reveal-on-scroll {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section Vị trí trên trang chủ: giữ background đúng tỉ lệ (cover, center) */
+.landing-page .location-section.location-section--landing,
+.location-section--landing {
+  background: url('assets/vitri.png') center center no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .landing-page .location-section.location-section--landing,
+  .location-section--landing {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+/* Section Mặt bằng trên trang chủ */
+.landing-page #mat-bang.matbang-section {
+  background: url('assets/matbang22.png') center center no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .landing-page #mat-bang.matbang-section {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+/* Section Liên hệ trên trang chủ: nền riêng giống trang Liên hệ */
+.landing-page .contact-rivera-section.contact-rivera-section--landing,
+.contact-rivera-section--landing {
+  background: url('assets/Lienhebgnew.png') center center no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+}
+@media (max-width: 768px) {
+  .landing-page .contact-rivera-section.contact-rivera-section--landing,
+  .contact-rivera-section--landing {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+/* Landing: bỏ khoảng hở giữa Thư viện -> Liên hệ */
+.landing-page .library-section {
+  min-height: auto;
+  padding-bottom: 40px;
+}
+
+.landing-page .contact-rivera-section--landing {
+  margin-top: 0;
+}
+
+/* Landing effects: stagger reveal + hero parallax */
+.landing-page > section.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition: opacity 0.6s ease, transform 0.75s cubic-bezier(.22,.61,.36,1);
+}
+
+.landing-page > section.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.landing-page > section.reveal-on-scroll .reveal-child {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition: opacity 0.55s ease, transform 0.7s cubic-bezier(.2,.8,.2,1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.landing-page > section.reveal-on-scroll.is-visible .reveal-child {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.landing-page .hero-section .hero-title-image,
+.landing-page .hero-section .hero-image img,
+.landing-page .hero-section .hero-bottom-image img {
+  will-change: transform;
+  transition: transform 0.25s ease-out;
+}
+
+.landing-page .advantages-grid .advantage-card {
+  transform-origin: center bottom;
+}
+
+.landing-page .advantages-grid .advantage-card:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+@media (max-width: 1024px) {
+  .landing-page > section.reveal-on-scroll {
+    transform: translate3d(0, 24px, 0);
+  }
+
+  .landing-page > section.reveal-on-scroll .reveal-child {
+    transform: translate3d(0, 16px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page > section.reveal-on-scroll,
+  .landing-page > section.reveal-on-scroll .reveal-child,
+  .landing-page .hero-section .hero-title-image,
+  .landing-page .hero-section .hero-image img,
+  .landing-page .hero-section .hero-bottom-image img {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+}
+

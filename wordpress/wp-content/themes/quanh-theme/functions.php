@@ -4,6 +4,8 @@ if ( ! defined( 'QUANH_THEME_VERSION' ) ) {
   define( 'QUANH_THEME_VERSION', '1.0.0' );
 }
 
+require_once get_template_directory() . '/inc/library-admin.php';
+
 add_theme_support('menus');
 add_theme_support('title-tag');
 
@@ -31,33 +33,57 @@ function quanh_body_class_template_pages( $classes ) {
 }
 add_filter( 'body_class', 'quanh_body_class_template_pages', 20 );
 
-// Fallback menu tự động nếu menu chưa được cấu hình
+/**
+ * Menu header chỉ hiển thị Trang chủ + Tin tức (dù đã tạo menu đầy đủ trong WP).
+ * Các mục Tổng quan, Vị trí, Mặt bằng, Ưu thế, Thư viện, Liên hệ đã gom vào landing.
+ */
+function quanh_filter_header_menu_to_two_items( $items, $args ) {
+  if ( empty( $args->theme_location ) || $args->theme_location !== 'header' ) {
+    return $items;
+  }
+  $home_url      = trailingslashit( home_url() );
+  $news_url      = trailingslashit( home_url( '/tin-tuc/' ) );
+  $news_page     = get_page_by_path( 'tin-tuc' );
+  $news_permalink = $news_page ? trailingslashit( get_permalink( $news_page ) ) : $news_url;
+  $home_item = null;
+  $news_item = null;
+  foreach ( $items as $item ) {
+    $url = trailingslashit( $item->url );
+    if ( $home_item === null && ( $url === $home_url || $item->url === home_url() ) ) {
+      $home_item = $item;
+    }
+    if ( $news_item === null && ( $url === $news_url || $url === $news_permalink || strpos( $item->url, '/tin-tuc' ) !== false ) ) {
+      $news_item = $item;
+    }
+    if ( $home_item && $news_item ) {
+      break;
+    }
+  }
+  $keep = array_filter( array( $home_item, $news_item ) );
+  if ( count( $keep ) === 0 ) {
+    return $items;
+  }
+  return array_values( $keep );
+}
+add_filter( 'wp_nav_menu_objects', 'quanh_filter_header_menu_to_two_items', 10, 2 );
+
+// Fallback menu: chỉ Trang chủ và Tin tức (các mục khác gom vào landing)
 function quanh_fallback_menu() {
-  $pages = [
-    ['title' => 'Trang chủ', 'slug' => ''],
-    ['title' => 'Tổng quan', 'slug' => 'tong-quan'],
-    ['title' => 'Vị trí', 'slug' => 'vi-tri'],
-    ['title' => 'Mặt bằng', 'slug' => 'mat-bang'],
-    ['title' => 'Ưu thế', 'slug' => 'uu-the'],
-    ['title' => 'Thư viện', 'slug' => 'thu-vien'],
-    ['title' => 'Tin tức', 'slug' => 'tin-tuc'],
-    ['title' => 'Liên hệ', 'slug' => 'lien-he']
+  $items = [
+    ['title' => 'Trang chủ', 'url' => home_url('/')],
+    ['title' => 'Tin tức', 'url' => home_url('/tin-tuc')],
   ];
-  
+
   echo '<ul class="menu">';
-  foreach ($pages as $page) {
-    $url = home_url('/' . ($page['slug'] ? $page['slug'] : ''));
+  foreach ($items as $item) {
     $current = '';
-    
-    // Kiểm tra trang hiện tại
-    if (is_front_page() && $page['slug'] === '') {
+    if (is_front_page() && $item['title'] === 'Trang chủ') {
       $current = ' current-menu-item';
-    } elseif (is_page($page['slug'])) {
+    } elseif (is_page('tin-tuc') && $item['title'] === 'Tin tức') {
       $current = ' current-menu-item';
     }
-    
     echo '<li class="menu-item' . $current . '">';
-    echo '<a href="' . esc_url($url) . '">' . esc_html($page['title']) . '</a>';
+    echo '<a href="' . esc_url($item['url']) . '">' . esc_html($item['title']) . '</a>';
     echo '</li>';
   }
   echo '</ul>';
@@ -156,6 +182,17 @@ function quanh_enqueue_scripts() {
     'ajaxurl'  => admin_url('admin-ajax.php'),
     'nonce'    => wp_create_nonce('news_load_more'),
   ));
+
+  /* Hiệu ứng cuộn landing: reveal khi section vào viewport */
+  if (is_front_page()) {
+    wp_enqueue_script(
+      'quanh-scroll-animations',
+      get_template_directory_uri() . '/assets/js/scroll-animations.js',
+      array(),
+      $ver_js( 'scroll-animations.js' ),
+      true
+    );
+  }
 }
 add_action('wp_enqueue_scripts', 'quanh_enqueue_scripts');
 

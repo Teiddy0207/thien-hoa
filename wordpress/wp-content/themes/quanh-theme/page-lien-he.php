@@ -182,8 +182,10 @@ get_header();
     .rv-info-icon-wrapper {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 25px;
     }
+
+ 
 
     /* Footer với disclaimer */
     .rv-footer-with-wave {
@@ -315,47 +317,50 @@ get_header();
         }
     }
 </style>
+
 <section class="contact-rivera-section">
     <div class="rv-container">
-                                <div class="rv-info-title">THÔNG TIN LIÊN HỆ:</div>
+
+        <div class="rv-info-title">THÔNG TIN LIÊN HỆ:</div>
 
         <div class="rv-row">
-            
 
+            <!-- LEFT INFO -->
             <div class="rv-col-info">
 
-                <div class="rv-info-item">
-
-
-                <div class="rv-info-icon-wrapper">
-                    <div class="rv-info-icon">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan6.png" alt="">
-                    </div>
-                    <div>
-                    <span class="rv-info-label">Địa chỉ dự án:</span>
-                    <div class="rv-info-text">
-                        Xã Tân Dương, Tỉnh Đồng Tháp.<br>
-                    </div>
-                    </div>
-                    </div>
-
-                </div>
-
+                <!-- Address -->
                 <div class="rv-info-item">
                     <div class="rv-info-icon-wrapper">
-                 <div class="rv-info-icon">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/calllienhe.png" alt="">
-                    </div>
+                        <div class="rv-info-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/tongquan2.png" alt="">
+                        </div>
 
-                    <div>
-                    <span class="rv-info-label">Hotline CSKH:</span>
-                    <div class="rv-info-text">
-                        0909.xxx.xxx (Liên hệ trực tiếp)
+                        <div>
+                            <span class="rv-info-label">Địa chỉ dự án:</span>
+                            <div class="rv-info-text">
+                                Xã Tân Dương, Tỉnh Đồng Tháp.
+                            </div>
+                        </div>
                     </div>
-</div>
-</div>
                 </div>
 
+                <!-- Hotline -->
+                <div class="rv-info-item">
+                    <div class="rv-info-icon-wrapper">
+                        <div class="rv-info-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/calllienhe.png" alt="">
+                        </div>
+
+                        <div>
+                            <span class="rv-info-label">Hotline CSKH:</span>
+                            <div class="rv-info-text">
+                                0909.xxx.xxx (Liên hệ trực tiếp)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legal name -->
                 <div class="rv-info-item">
                     <span class="rv-info-label">TÊN PHÁP LÝ:</span>
                     <div class="rv-info-text">
@@ -363,20 +368,25 @@ get_header();
                     </div>
                 </div>
 
+                <!-- Sales office -->
                 <div class="rv-info-item">
                     <span class="rv-info-label">VĂN PHÒNG BÁN HÀNG:</span>
                     <div class="rv-info-text">
                         Số 123, Đường Hùng Vương, TP. Sa Đéc
                     </div>
                 </div>
+
             </div>
 
+
+            <!-- RIGHT FORM -->
             <div class="rv-col-form">
+
                 <h2 class="rv-form-title">ĐĂNG KÝ</h2>
                 <div class="rv-form-subtitle">NHẬN THÔNG TIN DỰ ÁN</div>
 
                 <form action="" method="post">
-                    
+
                     <div class="rv-input-group">
                         <input type="text" class="rv-input" placeholder="Họ và tên" required>
                     </div>
@@ -385,24 +395,35 @@ get_header();
                         <div class="rv-input-group">
                             <input type="tel" class="rv-input" placeholder="Số điện thoại" required>
                         </div>
+
                         <div class="rv-input-group">
                             <input type="email" class="rv-input" placeholder="Email">
                         </div>
                     </div>
 
                     <div class="rv-note">
-                        Tư vấn viên của chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất. Chân thành cảm ơn!
+                        Tư vấn viên của chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.
+                        Chân thành cảm ơn!
                     </div>
 
-                    <button type="submit" class="rv-submit-btn">ĐĂNG KÝ NGAY</button>
+                    <button type="submit" class="rv-submit-btn">
+                        ĐĂNG KÝ NGAY
+                    </button>
+
                 </form>
             </div>
 
         </div>
-        
+
+
+        <!-- FOOTER -->
         <div class="rv-footer-with-wave">
-            <div class="rv-disclaimer">* Thông tin, hình ảnh, các tiện ích trên website chỉ mang tính chất tương đối và có thể được điều chỉnh theo quyết định của Chủ đầu tư tại từng thời điểm, đảm bảo phù hợp quy hoạch và thực tế thi công Dự án.</div>
+            <div class="rv-disclaimer">
+                * Thông tin, hình ảnh, các tiện ích trên website chỉ mang tính chất tương đối
+                và có thể được điều chỉnh theo quyết định của Chủ đầu tư tại từng thời điểm,
+                đảm bảo phù hợp quy hoạch và thực tế thi công Dự án.
+            </div>
         </div>
+
     </div>
 </section>
-

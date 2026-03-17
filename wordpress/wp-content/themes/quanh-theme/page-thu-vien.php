@@ -17,72 +17,71 @@ get_header();
       <a href="#video" class="tab-link">VIDEO</a>
     </div>
 
-    <!-- Gallery Section -->
+    <!-- Gallery Section: mỗi lần hiển thị 2 ảnh, nút Trước/Sau chuyển trang -->
     <div class="library-gallery" id="hinh-anh">
-      
-      <!-- Gallery Grid -->
-      <div class="gallery-grid">
+      <div class="gallery-pages-wrap">
         <?php
-        // Lấy tất cả ảnh đính kèm của page này
-        $attachments = get_attached_media('image', get_the_ID());
-        
-        // Nếu không có ảnh đính kèm, lấy từ gallery custom field hoặc fallback
-        if (empty($attachments)) {
-          // Fallback: sử dụng ảnh mặc định
-          $default_images = array(
-            array('url' => get_template_directory_uri() . '/assets/thuvien1.png', 'alt' => 'Rivera Thiên Hoa'),
-            array('url' => get_template_directory_uri() . '/assets/thuvien2.png', 'alt' => 'Rivera Thiên Hoa')
+        $gallery_ids = quanh_get_library_gallery_ids( get_the_ID() );
+        $items = array();
+        if ( ! empty( $gallery_ids ) ) {
+          foreach ( $gallery_ids as $aid ) {
+            $image_url = wp_get_attachment_image_url( $aid, 'large' );
+            if ( ! $image_url ) continue;
+            $image_alt = get_post_meta( $aid, '_wp_attachment_image_alt', true ) ?: get_the_title( $aid );
+            $image_caption = wp_get_attachment_caption( $aid );
+            $label = $image_caption ?: 'ẢNH DIỄN HỌA 3D';
+            $items[] = array( 'url' => $image_url, 'alt' => $image_alt, 'label' => $label );
+          }
+        }
+        if ( empty( $items ) ) {
+          $items = array(
+            array( 'url' => get_template_directory_uri() . '/assets/thuvien1.png', 'alt' => 'Rivera Thiên Hoa', 'label' => 'ẢNH DIỄN HỌA 3D' ),
+            array( 'url' => get_template_directory_uri() . '/assets/thuvien2.png', 'alt' => 'Rivera Thiên Hoa', 'label' => 'ẢNH DIỄN HỌA 3D' ),
           );
-          
-          foreach ($default_images as $img) {
-            echo '<div class="gallery-item">';
-            echo '  <div class="gallery-image-wrapper">';
-            echo '    <img src="' . esc_url($img['url']) . '" alt="' . esc_attr($img['alt']) . '">';
-            echo '    <div class="image-label">ẢNH DIỄN HỌA 3D</div>';
-            echo '  </div>';
-            echo '</div>';
+        }
+        $per_page = 2;
+        $chunks = array_chunk( $items, $per_page );
+        foreach ( $chunks as $i => $chunk ) {
+          $active = $i === 0 ? ' active' : '';
+          echo '<div class="gallery-page' . $active . '" data-page="' . ( $i + 1 ) . '">';
+          echo '<div class="gallery-grid">';
+          foreach ( $chunk as $img ) {
+            echo '<div class="gallery-item"><div class="gallery-image-wrapper">';
+            echo '<img src="' . esc_url( $img['url'] ) . '" alt="' . esc_attr( $img['alt'] ) . '">';
+            echo '<div class="image-label">' . esc_html( $img['label'] ) . '</div></div></div>';
           }
-        } else {
-          // Hiển thị ảnh từ Media Library
-          foreach ($attachments as $attachment) {
-            $image_url = wp_get_attachment_image_url($attachment->ID, 'large');
-            $image_alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
-            if (empty($image_alt)) {
-              $image_alt = get_the_title($attachment->ID);
-            }
-            $image_caption = wp_get_attachment_caption($attachment->ID);
-            $label = !empty($image_caption) ? $image_caption : 'ẢNH DIỄN HỌA 3D';
-            
-            echo '<div class="gallery-item">';
-            echo '  <div class="gallery-image-wrapper">';
-            echo '    <img src="' . esc_url($image_url) . '" alt="' . esc_attr($image_alt) . '">';
-            echo '    <div class="image-label">' . esc_html($label) . '</div>';
-            echo '  </div>';
-            echo '</div>';
-          }
+          echo '</div></div>';
         }
         ?>
       </div>
-
-      <!-- Gallery Navigation -->
       <div class="gallery-nav">
-        <a href="#" class="nav-arrow prev">
-          <span>← Trước</span>
-        </a>
-        <a href="#" class="nav-arrow next">
-          <span>Sau →</span>
-        </a>
+        <button type="button" class="nav-arrow prev" aria-label="Trang trước"><span>← Trước</span></button>
+        <span class="gallery-page-info"></span>
+        <button type="button" class="nav-arrow next" aria-label="Trang sau"><span>Sau →</span></button>
       </div>
-
     </div>
 
-    <!-- Video Section (Hidden by default) -->
+    <!-- Video Section (video quản lý tại meta box "Video Thư viện" khi sửa page) -->
     <div class="library-video" id="video" style="display: none;">
       <div class="video-grid">
-        <!-- Video items will be added here -->
-        <p style="text-align: center; color: rgba(255, 255, 255, 0.7); padding: 60px 0;">
-          Nội dung video sẽ được cập nhật sau
-        </p>
+        <?php
+        $library_videos = quanh_get_library_videos( get_the_ID() );
+        if ( ! empty( $library_videos ) ) {
+          foreach ( $library_videos as $v ) {
+            $url = is_array( $v ) ? ( $v['url'] ?? '' ) : (string) $v;
+            $title = is_array( $v ) ? ( $v['title'] ?? '' ) : '';
+            if ( $url === '' ) continue;
+            $embed = wp_oembed_get( $url, array( 'width' => 560 ) );
+            if ( $embed ) {
+              echo '<div class="video-item">';
+              if ( $title ) echo '<p class="video-item-title">' . esc_html( $title ) . '</p>';
+              echo $embed . '</div>';
+            }
+          }
+        } else {
+          echo '<p style="text-align: center; color: rgba(255, 255, 255, 0.7); padding: 60px 0;">Nội dung video sẽ được cập nhật sau. Vào <strong>Trang → Chỉnh sửa page Thư viện</strong>, thêm link YouTube/Vimeo tại meta box "Video Thư viện".</p>';
+        }
+        ?>
       </div>
     </div>
 
@@ -91,21 +90,14 @@ get_header();
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const tabs = document.querySelectorAll('.tab-link');
-  const gallerySection = document.getElementById('hinh-anh');
-  const videoSection = document.getElementById('video');
-
-  tabs.forEach(tab => {
+  var tabs = document.querySelectorAll('.tab-link');
+  var gallerySection = document.getElementById('hinh-anh');
+  var videoSection = document.getElementById('video');
+  tabs.forEach(function(tab) {
     tab.addEventListener('click', function(e) {
       e.preventDefault();
-      
-      // Remove active class from all tabs
-      tabs.forEach(t => t.classList.remove('active'));
-      
-      // Add active class to clicked tab
+      tabs.forEach(function(t) { t.classList.remove('active'); });
       this.classList.add('active');
-      
-      // Show/hide sections
       if (this.getAttribute('href') === '#hinh-anh') {
         gallerySection.style.display = 'block';
         videoSection.style.display = 'none';
@@ -115,6 +107,26 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  var wrap = document.querySelector('.library-gallery .gallery-pages-wrap');
+  var pages = wrap ? wrap.querySelectorAll('.gallery-page') : [];
+  var prevBtn = document.querySelector('.library-gallery .gallery-nav .nav-arrow.prev');
+  var nextBtn = document.querySelector('.library-gallery .gallery-nav .nav-arrow.next');
+  var infoEl = document.querySelector('.library-gallery .gallery-page-info');
+  var current = 1;
+  var total = pages.length;
+  function showPage(n) {
+    current = Math.max(1, Math.min(n, total));
+    pages.forEach(function(p, i) {
+      p.classList.toggle('active', i + 1 === current);
+    });
+    if (prevBtn) prevBtn.disabled = current <= 1;
+    if (nextBtn) nextBtn.disabled = current >= total;
+    if (infoEl) infoEl.textContent = total > 0 ? current + ' / ' + total : '';
+  }
+  if (prevBtn) prevBtn.addEventListener('click', function() { showPage(current - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { showPage(current + 1); });
+  showPage(1);
 });
 </script>
 
