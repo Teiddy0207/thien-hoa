@@ -223,10 +223,10 @@ body > section {
   top: 0;
   left: 0;
   right: 0;
-  /* padding: 20px 0; */
+  padding: 20px 0;
   z-index: 1000;
-  /* background: rgba(0, 30, 50, 0.5); */
-  /* backdrop-filter: blur(12px); */
+  background: rgba(0, 30, 50, 0.5);
+  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
@@ -4352,17 +4352,26 @@ body.single-post .single-post-section {
   margin: 30px 0;
 }
 
-/* Mô tả ảnh (caption dưới block Ảnh): chữ nghiêng, phân biệt với nội dung */
-.single-post-section .post-content figcaption,
-.single-post-section .post-content .wp-caption-text,
-.single-post-section .post-content .wp-element-caption {
+/* Mô tả ảnh (caption dưới ảnh): chữ nghiêng, phân biệt với nội dung */
+.single-post-section figcaption,
+.single-post-section .wp-caption-text,
+.single-post-section .wp-element-caption,
+.single-post-section .q-image-alt-caption {
   display: block;
-  font-style: italic;
+  font-style: italic !important;
   font-size: 0.95em;
   color: rgba(255, 255, 255, 0.75);
   margin-top: 8px;
   margin-bottom: 24px;
   line-height: 1.5;
+}
+
+/* Gutenberg image caption (đảm bảo đúng selector) */
+.single-post-section .wp-block-image figcaption,
+.single-post-section figure.wp-block-image figcaption,
+.single-post-section figure.wp-block-image > .wp-element-caption {
+  font-style: italic !important;
+  opacity: 0.78;
 }
 .single-post-section .post-content figure {
   margin-bottom: 24px;

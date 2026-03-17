@@ -346,6 +346,175 @@ function quanh_ajax_news_pagination() {
 add_action('wp_ajax_news_pagination', 'quanh_ajax_news_pagination');
 add_action('wp_ajax_nopriv_news_pagination', 'quanh_ajax_news_pagination');
 
+/**
+ * WP Admin (block editor): khi insert Image block, nếu chưa có caption thì dùng ALT làm caption.
+ * Mục tiêu: ngay dưới block ảnh hiển thị mô tả (alt) thay vì rỗng/khác.
+ */
+function quanh_admin_attachment_caption_fallback_to_alt( $response, $attachment, $meta ) {
+  if ( ! is_admin() ) {
+    return $response;
+  }
+
+  $alt = get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true );
+  $alt = is_string( $alt ) ? trim( $alt ) : '';
+  if ( $alt === '' ) {
+    return $response;
+  }
+
+  $caption_raw = '';
+  if ( isset( $response['caption'] ) && is_string( $response['caption'] ) ) {
+    $caption_raw = trim( wp_strip_all_tags( $response['caption'] ) );
+  }
+
+  if ( $caption_raw !== '' ) {
+    return $response;
+  }
+
+  // Gutenberg dùng caption/captionRaw từ response để fill caption attribute.
+  $response['caption'] = $alt;
+  $response['captionRaw'] = $alt;
+  return $response;
+}
+add_filter( 'wp_prepare_attachment_for_js', 'quanh_admin_attachment_caption_fallback_to_alt', 20, 3 );
+
+/**
+ * WP Admin (block editor): style caption dưới ảnh để phân biệt với nội dung (italic).
+ */
+function quanh_editor_caption_styles() {
+  $css = "
+    .editor-styles-wrapper figure figcaption,
+    .editor-styles-wrapper .wp-element-caption,
+    .editor-styles-wrapper .wp-caption-text {
+      font-style: italic;
+      opacity: 0.78;
+    }
+  ";
+  wp_register_style( 'quanh-editor-tweaks', false, array(), QUANH_THEME_VERSION );
+  wp_enqueue_style( 'quanh-editor-tweaks' );
+  wp_add_inline_style( 'quanh-editor-tweaks', $css );
+}
+add_action( 'enqueue_block_editor_assets', 'quanh_editor_caption_styles' );
+
+/**
+ * Single post: nếu ảnh không có caption thì hiển thị alt như mô tả ảnh.
+ */
+function quanh_single_add_alt_as_caption( $content ) {
+  if ( ! is_singular( 'post' ) || ! in_the_loop() || ! is_main_query() ) {
+    return $content;
+  }
+
+  if ( stripos( $content, '<img' ) === false ) {
+    return $content;
+  }
+
+  $html = '<div>' . $content . '</div>';
+
+  libxml_use_internal_errors( true );
+  $dom = new DOMDocument();
+  $dom->loadHTML( '<?xml encoding="utf-8" ?>' . $html, LIBXML_HTML_NODEFDTD | LIBXML_HTML_NOIMPLIED );
+  libxml_clear_errors();
+
+  $xpath = new DOMXPath( $dom );
+
+  // 1) Gutenberg: figure.wp-block-image có/không có figcaption
+  $figures = $xpath->query( '//figure[contains(concat(" ", normalize-space(@class), " "), " wp-block-image ")]' );
+  foreach ( $figures as $figure ) {
+    $img = $xpath->query( './/img[1]', $figure )->item( 0 );
+    if ( ! $img ) continue;
+
+    $alt = trim( (string) $img->getAttribute( 'alt' ) );
+    if ( $alt === '' ) continue;
+
+    $figcaption = $xpath->query( './figcaption', $figure )->item( 0 );
+    if ( $figcaption ) {
+      if ( trim( $figcaption->textContent ) !== '' ) continue;
+      while ( $figcaption->firstChild ) {
+        $figcaption->removeChild( $figcaption->firstChild );
+      }
+      $figcaption->appendChild( $dom->createTextNode( $alt ) );
+      $figcaption->setAttribute( 'class', trim( $figcaption->getAttribute( 'class' ) . ' q-image-alt-caption' ) );
+      continue;
+    }
+
+    $newCap = $dom->createElement( 'figcaption' );
+    $newCap->setAttribute( 'class', 'q-image-alt-caption' );
+    $newCap->appendChild( $dom->createTextNode( $alt ) );
+    $figure->appendChild( $newCap );
+  }
+
+  // 1b) Nếu người soạn nhập "mô tả ảnh" như 1 đoạn <p> ngay sau figure (thay vì caption),
+  // thì chuyển nó thành figcaption để frontend hiển thị đúng kiểu mô tả (italic).
+  foreach ( $figures as $figure ) {
+    // Nếu đã có figcaption và có nội dung thì bỏ qua
+    $existing = $xpath->query( './figcaption', $figure )->item( 0 );
+    if ( $existing && trim( $existing->textContent ) !== '' ) {
+      continue;
+    }
+
+    $next = $figure->nextSibling;
+    while ( $next && $next->nodeType === XML_TEXT_NODE && trim( $next->textContent ) === '' ) {
+      $next = $next->nextSibling;
+    }
+    if ( ! $next || $next->nodeType !== XML_ELEMENT_NODE || strtolower( $next->nodeName ) !== 'p' ) {
+      continue;
+    }
+
+    // Heuristic: chỉ nhận "mô tả" ngắn, không chứa markup phức tạp
+    $raw = $dom->saveHTML( $next );
+    if ( preg_match( '/<(a|strong|b|em|i|u|span|br|img|figure|ul|ol|li|h\\d)\\b/i', $raw ) ) {
+      continue;
+    }
+    $text = trim( $next->textContent );
+    if ( $text === '' || mb_strlen( $text ) > 180 ) {
+      continue;
+    }
+
+    if ( $existing ) {
+      while ( $existing->firstChild ) {
+        $existing->removeChild( $existing->firstChild );
+      }
+      $existing->appendChild( $dom->createTextNode( $text ) );
+      $existing->setAttribute( 'class', trim( $existing->getAttribute( 'class' ) . ' q-image-alt-caption' ) );
+    } else {
+      $cap = $dom->createElement( 'figcaption' );
+      $cap->setAttribute( 'class', 'q-image-alt-caption' );
+      $cap->appendChild( $dom->createTextNode( $text ) );
+      $figure->appendChild( $cap );
+    }
+
+    // Xoá paragraph mô tả (đã chuyển vào caption)
+    $next->parentNode->removeChild( $next );
+  }
+
+  // 2) Ảnh thường (không nằm trong figure): wrap bằng figure + figcaption (alt)
+  $imgs = $xpath->query( '//img[not(ancestor::figure)]' );
+  foreach ( $imgs as $img ) {
+    $alt = trim( (string) $img->getAttribute( 'alt' ) );
+    if ( $alt === '' ) continue;
+
+    $figure = $dom->createElement( 'figure' );
+    $figure->setAttribute( 'class', 'q-alt-figure' );
+
+    $clonedImg = $img->cloneNode( true );
+    $figure->appendChild( $clonedImg );
+
+    $cap = $dom->createElement( 'figcaption' );
+    $cap->setAttribute( 'class', 'q-image-alt-caption' );
+    $cap->appendChild( $dom->createTextNode( $alt ) );
+    $figure->appendChild( $cap );
+
+    $img->parentNode->replaceChild( $figure, $img );
+  }
+
+  $wrapper = $dom->getElementsByTagName( 'div' )->item( 0 );
+  $out = '';
+  foreach ( $wrapper->childNodes as $node ) {
+    $out .= $dom->saveHTML( $node );
+  }
+  return $out;
+}
+add_filter( 'the_content', 'quanh_single_add_alt_as_caption', 30 );
+
 
 // --- BẮT ĐẦU COPY TỪ ĐÂY ---
 function tao_bai_viet_mock_rivera() {
