@@ -56,7 +56,6 @@ get_header();
       </div>
       <div class="gallery-nav">
         <button type="button" class="nav-arrow prev" aria-label="Trang trước"><span>← Trước</span></button>
-        <span class="gallery-page-info"></span>
         <button type="button" class="nav-arrow next" aria-label="Trang sau"><span>Sau →</span></button>
       </div>
     </div>
@@ -112,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var pages = wrap ? wrap.querySelectorAll('.gallery-page') : [];
   var prevBtn = document.querySelector('.library-gallery .gallery-nav .nav-arrow.prev');
   var nextBtn = document.querySelector('.library-gallery .gallery-nav .nav-arrow.next');
-  var infoEl = document.querySelector('.library-gallery .gallery-page-info');
   var current = 1;
   var total = pages.length;
   function showPage(n) {

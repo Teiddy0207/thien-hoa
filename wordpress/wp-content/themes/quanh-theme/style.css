@@ -81,7 +81,7 @@ Version: 1.0
 @font-face {
   font-family: 'SFU Baskerville Book';
   src: url('./fonts/SFUBaskervilleBookRegular.TTF') format('truetype');
-  font-weight: 400;
+  font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
@@ -4959,6 +4959,7 @@ background: linear-gradient(90deg, #ff0000, #ff6a00);
   font-size: 14px;
   min-width: 4em;
   text-align: center;
+  display:none;
 }
 .gallery-nav .nav-arrow:disabled {
   opacity: 0.5;
