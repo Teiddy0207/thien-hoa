@@ -21,14 +21,7 @@ get_header();
 
         <div class="post-meta">
         <span class="post-date"><?php echo get_the_date('d/m/Y'); ?></span>
-        <?php
-        $categories = get_the_category();
-        if (!empty($categories)) :
-        ?>
-          <span class="post-category">
-            <?php echo esc_html($categories[0]->name); ?>
-          </span>
-        <?php endif; ?>
+ 
       </div>
     </div>
 
