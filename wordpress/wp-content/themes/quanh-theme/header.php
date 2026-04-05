@@ -50,7 +50,7 @@
   </a>
   <a href="#lien-he" class="contact-column" title="Liên hệ để đặt mua">
     <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/column4.png' ); ?>" alt="Liên hệ">
-    <span class="column-text">LIÊN HỆ ĐỂ ĐẶT MUA</span>
+    <span class="column-text">Liên hệ để đặt mua</span>
   </a>
 
 </div>
