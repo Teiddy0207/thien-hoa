@@ -4426,12 +4426,13 @@ body.single-post .single-post-section {
   margin: 30px 0;
 }
 
-/* Mô tả ảnh (caption dưới ảnh): chữ nghiêng, phân biệt với nội dung */
+/* Mô tả ảnh (caption dưới ảnh / alt → caption): chữ nghiêng, căn giữa */
 .single-post-section figcaption,
 .single-post-section .wp-caption-text,
 .single-post-section .wp-element-caption,
 .single-post-section .q-image-alt-caption {
   display: block;
+  text-align: center;
   font-style: italic !important;
   font-size: 0.95em;
   color: rgba(255, 255, 255, 0.75);
@@ -4444,6 +4445,7 @@ body.single-post .single-post-section {
 .single-post-section .wp-block-image figcaption,
 .single-post-section figure.wp-block-image figcaption,
 .single-post-section figure.wp-block-image > .wp-element-caption {
+  text-align: center;
   font-style: italic !important;
   opacity: 0.78;
 }
@@ -4453,6 +4455,7 @@ body.single-post .single-post-section {
 .single-post-section .post-content figure figcaption,
 .single-post-section .post-content figure .wp-caption-text,
 .single-post-section .post-content figure .wp-element-caption {
+  text-align: center;
   margin-bottom: 0;
 }
 
