@@ -672,7 +672,7 @@ body.page-template-front-page .hero-section .hero-image {
     body.home .hero-section,
     body.front-page .hero-section,
     body.page-template-front-page .hero-section {
-        margin-top: 0;
+        margin-top: clamp(52px, 12vw, 104px);
         min-height: min(52dvh, 420px);
         padding: 0;
         aspect-ratio: 4 / 5;
