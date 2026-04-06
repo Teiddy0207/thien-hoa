@@ -606,6 +606,7 @@ body.page-template-front-page .hero-section .hero-image {
         gap: 24px;
         padding: 0 16px;
         width: 100%;
+        position: relative;
     }
 
     .hero-content {
@@ -614,6 +615,9 @@ body.page-template-front-page .hero-section .hero-image {
         text-align: center;
         padding: 0;
         order: 1;
+        top: 0;
+        position: relative;
+        z-index: 2;
     }
 
     .hero-title-image {
@@ -633,31 +637,55 @@ body.page-template-front-page .hero-section .hero-image {
         font-size: 15px;
     }
 
-    /* Ảnh tòa nhà: ẩn trên điện thoại */
+    /* Ảnh tòa nhà: lớp nền, căn đáy giữa, không đè chữ */
     .hero-section .hero-image {
-        display: none;
+        display: flex;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        max-width: none;
+        align-items: flex-end;
+        justify-content: center;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .hero-section .hero-image img {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: min(72vh, 420px);
+        object-fit: contain;
+        object-position: bottom center;
     }
 
     .hero-bottom-image {
         display: none;
     }
 
-    /* ===== TRANG CHỦ MOBILE: tỉ lệ 16/9 + giao diện đẹp hơn (chỉ áp dụng cho trang chủ) ===== */
+    /* ===== TRANG CHỦ MOBILE: khung cao hơn 16/9, overlay + bố cục rõ ràng ===== */
     body.home .hero-section,
     body.front-page .hero-section,
     body.page-template-front-page .hero-section {
         margin-top: 0;
-        min-height: 0;
+        min-height: min(52dvh, 420px);
         padding: 0;
-        aspect-ratio: 16 / 9;
+        aspect-ratio: 4 / 5;
         width: 100%;
-        max-height: calc(100vh - 70px);
+        max-height: min(88dvh, 720px);
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: stretch;
+        align-items: stretch;
         position: relative;
         overflow: hidden;
+        isolation: isolate;
+        box-shadow: 0 12px 40px rgba(0, 12, 28, 0.35);
     }
 
     body.home .hero-section::before,
@@ -666,7 +694,27 @@ body.page-template-front-page .hero-section .hero-image {
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(to bottom, rgba(0, 30, 50, 0.25) 0%, rgba(0, 30, 50, 0.5) 100%);
+        background: linear-gradient(
+            165deg,
+            rgba(0, 18, 36, 0.72) 0%,
+            rgba(0, 28, 52, 0.28) 42%,
+            rgba(0, 14, 32, 0.55) 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    body.home .hero-section::after,
+    body.front-page .hero-section::after,
+    body.page-template-front-page .hero-section::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            ellipse 130% 70% at 50% 100%,
+            rgba(0, 0, 0, 0.42) 0%,
+            transparent 58%
+        );
         z-index: 1;
         pointer-events: none;
     }
@@ -679,34 +727,53 @@ body.page-template-front-page .hero-section .hero-image {
         flex: 1;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-left)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right));
-        gap: clamp(16px, 4vw, 28px);
+        padding: max(18px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-left)) max(14px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-right));
+        padding-top: max(22px, calc(env(safe-area-inset-top) + 8px));
+        gap: clamp(18px, 5vw, 30px);
+        min-height: 0;
+    }
+
+    body.home .hero-section .hero-image,
+    body.front-page .hero-section .hero-image,
+    body.page-template-front-page .hero-section .hero-image {
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    body.home .hero-section .hero-image img,
+    body.front-page .hero-section .hero-image img,
+    body.page-template-front-page .hero-section .hero-image img {
+        max-height: min(58%, 82vw);
+        width: auto;
+        filter: brightness(0.94) saturate(1.05);
     }
 
     body.home .hero-section .hero-content,
     body.front-page .hero-section .hero-content,
     body.page-template-front-page .hero-section .hero-content {
         width: 100%;
-        max-width: 90%;
+        max-width: 92%;
+        flex-shrink: 0;
     }
 
     body.home .hero-section .hero-title-image,
     body.front-page .hero-section .hero-title-image,
     body.page-template-front-page .hero-section .hero-title-image {
-        max-width: 85%;
+        max-width: min(92%, 360px);
         width: auto;
         height: auto;
         margin-bottom: 0;
-        filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.35));
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45)) drop-shadow(0 8px 28px rgba(0, 0, 0, 0.35));
     }
 
     body.home .hero-section .cta-btn-custom,
     body.front-page .hero-section .cta-btn-custom,
     body.page-template-front-page .hero-section .cta-btn-custom {
-        margin-top: clamp(8px, 2vw, 16px);
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        margin-top: clamp(4px, 1.5vw, 12px);
+        transition: transform 0.25s ease, filter 0.25s ease;
+        filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.4));
     }
 
     body.home .hero-section .cta-btn-custom:active,
@@ -718,14 +785,15 @@ body.page-template-front-page .hero-section .hero-image {
     body.home .hero-section .cta-btn-custom img,
     body.front-page .hero-section .cta-btn-custom img,
     body.page-template-front-page .hero-section .cta-btn-custom img {
-        height: clamp(44px, 12vw, 52px);
+        height: clamp(46px, 12.5vw, 54px);
         width: auto;
     }
 
     body.home .hero-section .cta-text,
     body.front-page .hero-section .cta-text,
     body.page-template-front-page .hero-section .cta-text {
-        font-size: clamp(14px, 3.8vw, 16px);
+        font-size: clamp(14px, 3.9vw, 16px);
+        letter-spacing: 0.04em;
     }
 }
 
@@ -767,20 +835,20 @@ body.page-template-front-page .hero-section .hero-image {
         display: none;
     }
 
-    /* Trang chủ: giữ 16/9 và safe-area trên màn nhỏ */
+    /* Trang chủ: đồng bộ tỉ lệ + safe-area */
     body.home .hero-section,
     body.front-page .hero-section,
     body.page-template-front-page .hero-section {
         padding: 0;
-        min-height: 0;
-        aspect-ratio: 16 / 9;
-        max-height: calc(100vh - 65px);
+        min-height: min(48dvh, 380px);
+        aspect-ratio: 4 / 5;
+        max-height: min(86dvh, 680px);
     }
 
     body.home .hero-section .hero-title-image,
     body.front-page .hero-section .hero-title-image,
     body.page-template-front-page .hero-section .hero-title-image {
-        max-width: 88%;
+        max-width: min(90%, 340px);
     }
 }
 
@@ -839,19 +907,21 @@ body.page-template-front-page .hero-section .hero-image {
         height: 44px;
     }
 
-    /* Trang chủ: giữ 16/9, container dùng safe-area */
+    /* Trang chủ: full viewport trừ header, notch an toàn */
     body.home .hero-section,
     body.front-page .hero-section,
     body.page-template-front-page .hero-section {
         padding: 0;
-        aspect-ratio: 16 / 9;
-        max-height: calc(100dvh - 70px);
+        min-height: min(46dvh, 360px);
+        aspect-ratio: 4 / 5;
+        max-height: min(88dvh, 700px);
     }
 
     body.home .hero-section .hero-container,
     body.front-page .hero-section .hero-container,
     body.page-template-front-page .hero-section .hero-container {
-        padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
+        padding: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-right));
+        padding-top: max(18px, calc(env(safe-area-inset-top) + 6px));
     }
 }
 
@@ -868,12 +938,14 @@ body.page-template-front-page .hero-section .hero-image {
         font-size: 13px;
     }
 
-    /* Trang chủ: giữ 16/9 */
+    /* Trang chủ: cùng tỉ lệ, không bị hẹp */
     body.home .hero-section,
     body.front-page .hero-section,
     body.page-template-front-page .hero-section {
         padding: 0;
-        aspect-ratio: 16 / 9;
+        min-height: min(44dvh, 340px);
+        aspect-ratio: 4 / 5;
+        max-height: min(90dvh, 660px);
     }
 }
 
