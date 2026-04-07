@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Landing page: Hero + Tổng quan + Vị trí + Mặt bằng + Ưu thế + Thư viện + Liên hệ
  * Cuộn mượt, một trang.
@@ -321,7 +321,7 @@ if (!empty($thu_vien_pages)) {
           <div class="rv-info-item">
             <div class="rv-info-icon-wrapper">
               <div class="rv-info-icon">
-                <img src="<?php echo esc_url($template_uri); ?>/assets/tongquan6.png" alt="">
+                <img src="<?php echo esc_url($template_uri); ?>/assets/tongquan2.png" alt="">
               </div>
               <div>
                 <span class="rv-info-label">Địa chỉ dự án:</span>
